@@ -9,6 +9,8 @@
 
 <meta name="description" content="Marketing Systems Architect, HubSpot Super Admin & Revenue Operations Specialist building scalable CRM automation systems.">
 
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 <style>
 
 *{
@@ -20,65 +22,33 @@
 
 body{
   font-family:'Inter',sans-serif;
+  background:#050816;
   color:#f8fafc;
   overflow-x:hidden;
-  background:#050816;
 }
 
-/* ===== Animated Gradient Background ===== */
+/* ===== LOTTIE BACKGROUND ===== */
 
-.background {
+.lottie-bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-2;
+  opacity:0.15;
+  pointer-events:none;
+}
+
+.overlay{
   position:fixed;
   width:100%;
   height:100%;
-  top:0;
-  left:0;
-  z-index:-2;
-  background:linear-gradient(-45deg,#0f172a,#020617,#0b1120,#111827);
-  background-size:400% 400%;
-  animation:gradientMove 15s ease infinite;
-}
-
-@keyframes gradientMove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-/* ===== Floating Glow Orbs ===== */
-
-.orb{
-  position:fixed;
-  border-radius:50%;
-  filter:blur(120px);
-  opacity:0.4;
+  background:linear-gradient(180deg,rgba(5,8,22,0.8),rgba(5,8,22,1));
   z-index:-1;
-  animation:float 20s ease-in-out infinite alternate;
 }
 
-.orb1{
-  width:500px;
-  height:500px;
-  background:#3b82f6;
-  top:-100px;
-  left:-100px;
-}
-
-.orb2{
-  width:400px;
-  height:400px;
-  background:#8b5cf6;
-  bottom:-150px;
-  right:-100px;
-  animation-delay:5s;
-}
-
-@keyframes float{
-  from{transform:translateY(0px);}
-  to{transform:translateY(60px);}
-}
-
-/* ===== Navigation ===== */
+/* ===== NAV ===== */
 
 nav{
   position:fixed;
@@ -103,7 +73,7 @@ nav a:hover{
   color:#22d3ee;
 }
 
-/* ===== Layout ===== */
+/* ===== SECTIONS ===== */
 
 section{
   padding:120px 10%;
@@ -114,11 +84,10 @@ section{
   display:flex;
   flex-direction:column;
   justify-content:center;
-  animation:fadeUp 1s ease forwards;
 }
 
 h1{
-  font-size:64px;
+  font-size:60px;
   font-weight:900;
   line-height:1.1;
 }
@@ -137,16 +106,18 @@ h1{
 }
 
 .profile{
-  width:160px;
+  width:150px;
   border-radius:50%;
   margin-top:30px;
   border:3px solid #22d3ee;
 }
 
+/* ===== BUTTON ===== */
+
 .btn{
   display:inline-block;
   margin-top:40px;
-  padding:14px 30px;
+  padding:14px 28px;
   border-radius:12px;
   background:linear-gradient(90deg,#3b82f6,#06b6d4);
   color:white;
@@ -156,32 +127,32 @@ h1{
 }
 
 .btn:hover{
-  transform:translateY(-5px);
+  transform:translateY(-4px);
   box-shadow:0 20px 40px rgba(59,130,246,0.4);
 }
 
-/* ===== Case Studies ===== */
+/* ===== CASE STUDIES ===== */
 
 .section-title{
-  font-size:36px;
+  font-size:34px;
   font-weight:800;
   margin-bottom:60px;
 }
 
 .case{
-  margin-bottom:100px;
-  animation:fadeUp 1s ease forwards;
+  margin-bottom:90px;
+}
+
+.case h3{
+  margin-bottom:20px;
 }
 
 .image-wrapper{
-  border-radius:20px;
+  max-width:900px;
+  margin-top:20px;
+  border-radius:16px;
   overflow:hidden;
-  box-shadow:0 30px 60px rgba(0,0,0,0.6);
-  transition:0.4s;
-}
-
-.image-wrapper:hover{
-  transform:scale(1.02);
+  box-shadow:0 25px 50px rgba(0,0,0,0.6);
 }
 
 .image-wrapper img{
@@ -190,7 +161,7 @@ h1{
   display:block;
 }
 
-/* ===== Metrics ===== */
+/* ===== METRICS ===== */
 
 .metrics{
   display:grid;
@@ -208,27 +179,14 @@ h1{
 }
 
 .metric-card:hover{
-  transform:translateY(-10px);
+  transform:translateY(-8px);
   border-color:#22d3ee;
 }
 
 .metric{
-  font-size:40px;
+  font-size:36px;
   font-weight:900;
   color:#22d3ee;
-}
-
-/* ===== Fade Animation ===== */
-
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
 }
 
 footer{
@@ -243,9 +201,18 @@ footer{
 
 <body>
 
-<div class="background"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+<!-- Lottie Background -->
+<div class="lottie-bg">
+<lottie-player 
+  src="https://assets10.lottiefiles.com/packages/lf20_Stt1R8.json" 
+  background="transparent"  
+  speed="1"  
+  loop  
+  autoplay>
+</lottie-player>
+</div>
+
+<div class="overlay"></div>
 
 <nav>
 <div><strong>Hashaam Tanveer</strong></div>
@@ -262,7 +229,7 @@ footer{
 <img src="images/Hashaam pic.png" class="profile">
 
 <p class="subtitle">
-Marketing Systems Architect & HubSpot Super Admin with 5+ years designing CRM ecosystems, automation frameworks, and enterprise lead infrastructure.
+Marketing Systems Architect & HubSpot Super Admin building automation frameworks and scalable CRM infrastructure for enterprise growth.
 </p>
 
 <a href="#hire" class="btn">Hire Me</a>
