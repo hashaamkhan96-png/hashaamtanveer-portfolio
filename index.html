@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hashaam Tanveer | Revenue Operations & CRM Architect</title>
+<title>Hashaam Tanveer | Revenue Operations Architect</title>
 
-<meta name="description" content="Hashaam Tanveer – Revenue Operations Specialist, HubSpot Super Admin, CRM Architect, Marketing Automation Engineer, Dynamics 365 Integrator with enterprise automation experience.">
+<meta name="description" content="Revenue Operations Architect & HubSpot Super Admin specializing in enterprise CRM infrastructure, automation engineering, lifecycle management, and scalable revenue systems.">
 
-<meta name="keywords" content="Revenue Operations, RevOps, HubSpot Super Admin, CRM Architect, Marketing Automation, Workflow Automation, Lead Routing, Dynamics 365 Integration, Zapier, n8n, Lifecycle Management, Sales Operations">
+<meta name="keywords" content="Revenue Operations, RevOps Architect, HubSpot Super Admin, CRM Architecture, Marketing Automation, Lifecycle Management, Enterprise Automation, Dynamics 365 Integration, Lead Routing, B2B SaaS Systems">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -17,12 +17,13 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Inter',sans-serif;
-  background:#041c18;
-  color:#e2fdf7;
+  background:#021a17;
+  color:#e6fffa;
   overflow-x:hidden;
 }
 
-/* Lottie Background */
+/* ===== Subtle Lottie Background ===== */
+
 .lottie-bg{
   position:fixed;
   top:0;
@@ -30,7 +31,7 @@ body{
   width:100%;
   height:100%;
   z-index:-2;
-  opacity:0.12;
+  opacity:0.08;
   pointer-events:none;
 }
 
@@ -38,19 +39,20 @@ body{
   position:fixed;
   width:100%;
   height:100%;
-  background:linear-gradient(to bottom,#041c18 10%,#021412 100%);
+  background:linear-gradient(to bottom,#021a17 0%,#011210 100%);
   z-index:-1;
 }
 
-/* NAV */
+/* ===== Navigation ===== */
+
 nav{
   position:fixed;
   width:100%;
   padding:20px 8%;
   display:flex;
   justify-content:space-between;
-  background:rgba(0,20,18,0.7);
-  backdrop-filter:blur(10px);
+  background:rgba(1,18,16,0.85);
+  backdrop-filter:blur(8px);
   z-index:1000;
 }
 
@@ -58,11 +60,14 @@ nav a{
   color:#9fffe7;
   text-decoration:none;
   margin-left:25px;
-  transition:.3s;
+  font-weight:500;
 }
+
 nav a:hover{color:#00ffcc;}
 
 section{padding:120px 10%;}
+
+/* ===== Hero ===== */
 
 .hero{
   height:100vh;
@@ -72,8 +77,9 @@ section{padding:120px 10%;}
 }
 
 h1{
-  font-size:58px;
+  font-size:56px;
   font-weight:900;
+  line-height:1.2;
 }
 
 .gradient{
@@ -83,119 +89,136 @@ h1{
 }
 
 .subtitle{
-  margin-top:20px;
-  max-width:750px;
-  color:#8dded1;
-  font-size:19px;
+  margin-top:25px;
+  max-width:700px;
+  color:#86d9cc;
+  font-size:18px;
 }
 
 .profile{
-  width:140px;
+  width:130px;
   border-radius:50%;
   margin-top:30px;
-  border:3px solid #00ffcc;
+  border:2px solid #00ffcc;
 }
 
 .btn{
   display:inline-block;
   margin-top:35px;
-  padding:14px 28px;
-  border-radius:10px;
+  padding:12px 26px;
+  border-radius:8px;
   background:#00ffcc;
-  color:#021412;
+  color:#01201c;
   text-decoration:none;
   font-weight:600;
+  margin-right:15px;
   transition:.3s;
 }
-.btn:hover{
-  transform:translateY(-4px);
-}
+.btn:hover{transform:translateY(-3px);}
 
-/* Case Studies */
+/* ===== Case Study Grid ===== */
+
 .section-title{
-  font-size:32px;
-  margin-bottom:60px;
+  font-size:30px;
   font-weight:800;
+  margin-bottom:60px;
 }
 
-.case{
-  margin-bottom:80px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;
 }
 
-.case h3{
+.case-card{
+  background:#042a26;
+  padding:20px;
+  border-radius:12px;
+  border:1px solid #064d44;
+  transition:.3s;
+}
+
+.case-card:hover{
+  transform:translateY(-5px);
+  border-color:#00ffcc;
+}
+
+.thumb{
+  width:100%;
+  height:220px;
+  overflow:hidden;
+  border-radius:8px;
   margin-bottom:15px;
 }
 
-/* FIXED HEIGHT IMAGE CONTAINER */
-.image-wrapper{
-  max-width:900px;
-  height:420px;
-  overflow:hidden;
-  border-radius:16px;
-  border:1px solid #064d44;
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-  cursor:pointer;
-}
-
-.image-wrapper img{
+.thumb img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-/* Metrics */
+.case-card h3{
+  font-size:16px;
+  margin-bottom:10px;
+}
+
+.case-card p{
+  font-size:14px;
+  color:#7fd6c8;
+}
+
+/* ===== Metrics ===== */
+
 .metrics{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:40px;
 }
 
 .metric-card{
-  background:#062823;
-  padding:35px;
-  border-radius:16px;
+  background:#042a26;
+  padding:30px;
+  border-radius:12px;
   border:1px solid #064d44;
   text-align:center;
 }
 
 .metric{
-  font-size:36px;
+  font-size:32px;
   font-weight:800;
   color:#00ffcc;
 }
 
-/* Modal */
-.modal{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
-  justify-content:center;
-  align-items:center;
-  z-index:2000;
+/* ===== LinkedIn Section ===== */
+
+.linkedin-box{
+  margin-top:60px;
+  padding:40px;
+  background:#042a26;
+  border-radius:12px;
+  border:1px solid #064d44;
 }
-.modal img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:10px;
+
+.linkedin-box a{
+  color:#00ffcc;
+  text-decoration:none;
+  font-weight:600;
 }
-.modal.active{display:flex;}
+
+/* ===== Footer ===== */
 
 footer{
   padding:60px;
   text-align:center;
-  background:#021412;
-  color:#6ad6c8;
+  background:#011210;
+  color:#7fd6c8;
 }
 
-/* Hidden ATS Block */
-.ats-keywords{
+/* ===== Hidden ATS Block ===== */
+
+.ats{
   position:absolute;
   left:-9999px;
-  font-size:1px;
   opacity:0;
 }
 
@@ -219,55 +242,63 @@ footer{
 <nav>
 <div><strong>Hashaam Tanveer</strong></div>
 <div>
-<a href="#projects">Projects</a>
+<a href="#projects">Case Studies</a>
 <a href="#impact">Impact</a>
-<a href="#hire">Hire</a>
+<a href="#contact">Contact</a>
 </div>
 </nav>
 
 <section class="hero">
-<h1>I Engineer <span class="gradient">Revenue Infrastructure</span></h1>
+<h1>Enterprise <span class="gradient">Revenue Infrastructure Architect</span></h1>
 
 <img src="images/Hashaam pic.png" class="profile">
 
 <p class="subtitle">
-Revenue Operations Specialist, HubSpot Super Admin, CRM Architect & Marketing Automation Engineer focused on scalable lifecycle systems, enterprise lead routing, and automation frameworks.
+RevOps Architect & HubSpot Super Admin specializing in enterprise lifecycle engineering, automation frameworks, CRM governance, and scalable B2B revenue systems.
 </p>
 
 <a href="Hashaam_Tanveer_Resume.pdf" target="_blank" class="btn">Download Resume</a>
+<a href="https://www.linkedin.com/in/hashaam-tanveer/" target="_blank" class="btn">LinkedIn Profile</a>
 </section>
 
 <section id="projects">
 <h2 class="section-title">Enterprise Automation Case Studies</h2>
 
-<div class="case">
-<h3>Adobe Partner Dashboard – Reporting & Attribution</h3>
-<div class="image-wrapper" onclick="openModal('images/Dashboard HubSpot.png')">
+<div class="grid">
+
+<div class="case-card">
+<div class="thumb">
 <img src="images/Dashboard HubSpot.png">
 </div>
+<h3>Adobe Partner Performance Dashboard</h3>
+<p>Enterprise reporting, attribution modeling, revenue performance tracking.</p>
 </div>
 
-<div class="case">
-<h3>Lead Routing & Multi-Branch Workflow Logic</h3>
-<div class="image-wrapper" onclick="openModal('images/Lead pass Workflow.png')">
+<div class="case-card">
+<div class="thumb">
 <img src="images/Lead pass Workflow.png">
 </div>
+<h3>Multi-Branch Lead Routing Architecture</h3>
+<p>Advanced workflow logic with dynamic routing & lifecycle automation.</p>
 </div>
 
-<div class="case">
-<h3>Microsoft Teams Webinar Automation</h3>
-<div class="image-wrapper" onclick="openModal('images/Webinar wf.png')">
+<div class="case-card">
+<div class="thumb">
 <img src="images/Webinar wf.png">
 </div>
+<h3>Webinar Automation & CRM Sync</h3>
+<p>Teams integration, automated registration, CRM pipeline movement.</p>
 </div>
 
-<div class="case">
-<h3>Education Sector Campaign Segmentation</h3>
-<div class="image-wrapper" onclick="openModal('images/Education Campaign.png')">
+<div class="case-card">
+<div class="thumb">
 <img src="images/Education Campaign.png">
 </div>
+<h3>Education Sector Segmentation Framework</h3>
+<p>Complex campaign logic with conditional enrollment triggers.</p>
 </div>
 
+</div>
 </section>
 
 <section id="impact">
@@ -275,24 +306,32 @@ Revenue Operations Specialist, HubSpot Super Admin, CRM Architect & Marketing Au
 <div class="metrics">
 <div class="metric-card">
 <div class="metric">25+</div>
-<p>Advanced Automation Systems Built</p>
+<p>Enterprise Automation Systems</p>
 </div>
 <div class="metric-card">
 <div class="metric">30%</div>
-<p>Manual Assignment Reduction</p>
+<p>Operational Efficiency Increase</p>
 </div>
 <div class="metric-card">
 <div class="metric">Global</div>
-<p>US, UK, AUS, CAN Systems</p>
+<p>US, UK, AUS, CAN Deployments</p>
 </div>
 </div>
 </section>
 
-<section id="hire">
-<h2 class="section-title">Open to Global RevOps & CRM Roles</h2>
+<section id="contact">
+<h2 class="section-title">Let’s Build Scalable Revenue Systems</h2>
 <p class="subtitle">
-Available for Revenue Operations, Marketing Operations, CRM Architecture, Lifecycle Engineering, and Automation Engineering roles (Remote / International).
+Open to Revenue Operations, CRM Architecture, and Marketing Automation leadership roles globally.
 </p>
+
+<div class="linkedin-box">
+<p>Connect with me on LinkedIn:</p>
+<a href="https://www.linkedin.com/in/hashaam-tanveer/" target="_blank">
+linkedin.com/in/hashaam-tanveer
+</a>
+</div>
+
 <a href="mailto:hashaamtanveerk@gmail.com" class="btn">Contact Me</a>
 </section>
 
@@ -300,29 +339,8 @@ Available for Revenue Operations, Marketing Operations, CRM Architecture, Lifecy
 © 2026 Hashaam Tanveer | Revenue Operations Architect
 </footer>
 
-<!-- Modal -->
-<div class="modal" id="modal" onclick="closeModal()">
-<img id="modalImg">
-</div>
-
-<script>
-function openModal(src){
-  document.getElementById("modalImg").src = src;
-  document.getElementById("modal").classList.add("active");
-}
-function closeModal(){
-  document.getElementById("modal").classList.remove("active");
-}
-</script>
-
-<!-- ATS Hidden Block -->
-<div class="ats-keywords">
-HubSpot Super Admin, Revenue Operations Manager, Marketing Automation Specialist,
-CRM Architect, Lifecycle Management, Lead Scoring, Lead Routing,
-Salesforce Integration, Dynamics 365 CRM, Zapier Automation,
-n8n Workflows, B2B SaaS Marketing Systems,
-Sales Operations Alignment, Demand Generation Infrastructure,
-Enterprise CRM Strategy, Data Governance, Reporting Dashboards
+<div class="ats">
+HubSpot Super Admin, Revenue Operations Director, CRM Architecture Lead, Marketing Automation Specialist, Enterprise Lifecycle Engineer, B2B SaaS Systems Architect, Demand Generation Infrastructure, Lead Scoring, Lead Routing, Sales Enablement Automation, Dynamics 365 CRM Integration, Data Governance, RevOps Strategy.
 </div>
 
 </body>
