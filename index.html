@@ -7,7 +7,7 @@
 
 <title>Hashaam Tanveer | Revenue Systems Architect</title>
 
-<meta name="description" content="Revenue Operations Architect and HubSpot Super Admin building scalable CRM automation and marketing operations infrastructure.">
+<meta name="description" content="Revenue Operations Architect and HubSpot Super Admin building scalable CRM automation systems and marketing infrastructure.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
@@ -24,7 +24,7 @@ color:#e6fffa;
 overflow-x:hidden;
 }
 
-/* Animated Background */
+/* Background */
 
 .lottie{
 position:fixed;
@@ -117,9 +117,7 @@ margin-right:15px;
 transition:.3s;
 }
 
-.btn:hover{
-transform:translateY(-3px);
-}
+.btn:hover{transform:translateY(-3px)}
 
 /* Scroll Animation */
 
@@ -134,7 +132,7 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* Projects Grid */
+/* Projects */
 
 .section-title{
 font-size:32px;
@@ -176,7 +174,7 @@ height:100%;
 object-fit:cover;
 }
 
-/* Popup Modal */
+/* Modal */
 
 .modal{
 position:fixed;
@@ -199,28 +197,30 @@ border-radius:10px;
 
 .modal.active{display:flex}
 
-/* Logo Section */
+/* Logos */
 
 .logos{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-gap:50px;
+gap:40px;
 margin-top:40px;
 }
 
 .logos img{
-width:90px;
-opacity:.8;
+width:80px;
+height:60px;
+object-fit:contain;
+opacity:.85;
 transition:.3s;
 }
 
 .logos img:hover{
+transform:scale(1.15);
 opacity:1;
-transform:scale(1.1);
 }
 
-/* Diagram Section */
+/* Diagram */
 
 .diagram{
 margin-top:80px;
@@ -252,27 +252,7 @@ align-self:center;
 color:#00ffcc;
 }
 
-/* Metrics */
-
-.metrics{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:40px;
-}
-
-.metric-card{
-background:#042a26;
-padding:25px;
-border-radius:10px;
-border:1px solid #064d44;
-text-align:center;
-}
-
-.metric{
-font-size:32px;
-font-weight:800;
-color:#00ffcc;
-}
+/* Footer */
 
 footer{
 padding:60px;
@@ -288,30 +268,19 @@ color:#7fd6c8;
 <body>
 
 <div class="lottie">
-
-<lottie-player
-src="https://assets9.lottiefiles.com/packages/lf20_qp1q7mct.json"
-background="transparent"
-speed="1"
-loop
-autoplay>
-</lottie-player>
-
+<lottie-player src="https://assets9.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" loop autoplay></lottie-player>
 </div>
 
 <div class="overlay"></div>
 
 <nav>
-
 <div><strong>Hashaam Tanveer</strong></div>
-
 <div>
 <a href="#projects">Projects</a>
 <a href="#stack">Stack</a>
 <a href="#architecture">Architecture</a>
 <a href="#contact">Contact</a>
 </div>
-
 </nav>
 
 <section class="hero reveal">
@@ -321,7 +290,7 @@ autoplay>
 <img src="images/Hashaam pic.png" class="profile">
 
 <p class="subtitle">
-HubSpot Super Admin and RevOps Architect building scalable marketing automation systems and enterprise CRM infrastructure.
+HubSpot Super Admin and RevOps Architect building scalable marketing automation and CRM infrastructure.
 </p>
 
 <a href="Hashaam_Tanveer_Resume.pdf" class="btn">Download Resume</a>
@@ -338,7 +307,7 @@ HubSpot Super Admin and RevOps Architect building scalable marketing automation 
 
 <div class="project" onclick="openModal('images/Dashboard HubSpot.png')">
 <div class="thumb"><img src="images/Dashboard HubSpot.png"></div>
-<h3>HubSpot Dashboard</h3>
+<h3>HubSpot Performance Dashboard</h3>
 </div>
 
 <div class="project" onclick="openModal('images/Lead pass Workflow.png')">
@@ -353,17 +322,22 @@ HubSpot Super Admin and RevOps Architect building scalable marketing automation 
 
 <div class="project" onclick="openModal('images/Education Campaign.png')">
 <div class="thumb"><img src="images/Education Campaign.png"></div>
-<h3>Education Campaign</h3>
+<h3>Education Campaign Automation</h3>
 </div>
 
 <div class="project" onclick="openModal('images/wrike1.png')">
 <div class="thumb"><img src="images/wrike1.png"></div>
-<h3>Wrike Workspace</h3>
+<h3>Wrike Workspace Automation</h3>
 </div>
 
 <div class="project" onclick="openModal('images/wrike2.png')">
 <div class="thumb"><img src="images/wrike2.png"></div>
-<h3>Wrike Workflow</h3>
+<h3>Wrike Workflow Management</h3>
+</div>
+
+<div class="project" onclick="openModal('images/wrike-dashboard.png')">
+<div class="thumb"><img src="images/wrike-dashboard.png"></div>
+<h3>Wrike Dashboard Creation & Management</h3>
 </div>
 
 </div>
@@ -379,9 +353,22 @@ HubSpot Super Admin and RevOps Architect building scalable marketing automation 
 <img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg">
 <img src="https://cdn.worldvectorlogo.com/logos/microsoft-dynamics-365.svg">
 <img src="https://cdn.worldvectorlogo.com/logos/zapier.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/n8n.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/clickup.svg">
 <img src="https://cdn.worldvectorlogo.com/logos/wrike.svg">
-<img src="https://cdn.worldvectorlogo.com/logos/google-analytics-4.svg">
-<img src="https://cdn.worldvectorlogo.com/logos/wordpress-icon-1.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/zoho.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/canva-1.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/meta-1.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/google-gemini.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/anthropic.svg">
+<img src="https://cdn.worldvectorlogo.com/logos/replit.svg">
+
+<img src="images/gohighlevel.png">
+<img src="images/lovable.png">
+<img src="images/atoms.png">
+<img src="images/clay.png">
 
 </div>
 
@@ -428,9 +415,7 @@ Revenue Operations • CRM Architecture • Marketing Automation Leadership
 </section>
 
 <footer>
-
 © 2026 Hashaam Tanveer | Revenue Operations Architect
-
 </footer>
 
 <div class="modal" id="modal" onclick="closeModal()">
@@ -438,8 +423,6 @@ Revenue Operations • CRM Architecture • Marketing Automation Leadership
 </div>
 
 <script>
-
-/* modal */
 
 function openModal(src){
 document.getElementById("modal").classList.add("active");
@@ -450,28 +433,16 @@ function closeModal(){
 document.getElementById("modal").classList.remove("active");
 }
 
-/* scroll reveal */
-
 function reveal(){
-
 var reveals=document.querySelectorAll(".reveal");
-
 for(var i=0;i<reveals.length;i++){
-
 var windowHeight=window.innerHeight;
-
 var elementTop=reveals[i].getBoundingClientRect().top;
-
 var visible=120;
-
 if(elementTop<windowHeight-visible){
-
 reveals[i].classList.add("active");
-
 }
-
 }
-
 }
 
 window.addEventListener("scroll",reveal);
