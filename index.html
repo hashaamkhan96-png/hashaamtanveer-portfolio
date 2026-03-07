@@ -215,12 +215,36 @@ display:flex;
 overflow:hidden;
 position:relative;
 margin-top:60px;
+
+/* fading edges */
+
+mask-image: linear-gradient(
+to right,
+transparent,
+black 10%,
+black 90%,
+transparent
+);
+-webkit-mask-image: linear-gradient(
+to right,
+transparent,
+black 10%,
+black 90%,
+transparent
+);
+
 }
 
 .logo-track{
 display:flex;
 gap:60px;
-animation:scroll 40s linear infinite;
+animation:scroll 22s linear infinite;
+}
+
+/* pause on hover */
+
+.logo-carousel:hover .logo-track{
+animation-play-state: paused;
 }
 
 .logo-track img{
@@ -327,37 +351,31 @@ HubSpot • n8n • Zapier • Dynamics 365 • CRM Automation • Marketing Sys
 <div class="project" onclick="openModal('images/Dashboard HubSpot.png')">
 <div class="thumb"><img src="images/Dashboard HubSpot.png"></div>
 <h3>HubSpot Analytics Dashboard</h3>
-<p>Campaign and lifecycle analytics dashboard tracking MQLs, SQLs and pipeline performance.</p>
 </div>
 
 <div class="project" onclick="openModal('images/Lead pass Workflow.png')">
 <div class="thumb"><img src="images/Lead pass Workflow.png"></div>
 <h3>Lead Routing Automation</h3>
-<p>Automated lead assignment and lifecycle progression using HubSpot workflows.</p>
 </div>
 
 <div class="project" onclick="openModal('images/Webinar wf.png')">
 <div class="thumb"><img src="images/Webinar wf.png"></div>
 <h3>Webinar Lifecycle Workflow</h3>
-<p>End-to-end webinar automation including registration, reminders and post-event follow-up.</p>
 </div>
 
 <div class="project" onclick="openModal('images/Education Campaign.png')">
 <div class="thumb"><img src="images/Education Campaign.png"></div>
 <h3>Education Campaign System</h3>
-<p>Landing pages, email nurture and campaign reporting system for marketing teams.</p>
 </div>
 
 <div class="project" onclick="openModal('images/wrike1.png')">
 <div class="thumb"><img src="images/wrike1.png"></div>
 <h3>Wrike Workspace Setup</h3>
-<p>Operational workspace design for marketing teams including dashboards and task automation.</p>
 </div>
 
 <div class="project" onclick="openModal('images/wrike2.png')">
 <div class="thumb"><img src="images/wrike2.png"></div>
 <h3>Wrike Workflow Architecture</h3>
-<p>Custom workflow architecture improving cross-team collaboration and task tracking.</p>
 </div>
 
 </div>
