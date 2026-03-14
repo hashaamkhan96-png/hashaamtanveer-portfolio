@@ -1,766 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hashaam Tanveer | AI & Automation Systems Architect</title>
-  <meta name="description" content="AI & Automation Systems Architect and HubSpot Super Admin. Building CRM systems, workflow automation and revenue operations infrastructure.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <style>
-    /* ─── RESET & TOKENS ─── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:          #07090F;
-      --bg-2:        #0B0F1A;
-      --bg-card:     rgba(255,255,255,0.032);
-      --bg-card-h:   rgba(255,255,255,0.06);
-      --border:      rgba(255,255,255,0.07);
-      --border-h:    rgba(6,182,212,0.35);
-      --cyan:        #06B6D4;
-      --cyan-10:     rgba(6,182,212,0.10);
-      --cyan-20:     rgba(6,182,212,0.20);
-      --purple:      #8B5CF6;
-      --purple-10:   rgba(139,92,246,0.10);
-      --text:        #EFF6FF;
-      --text-sub:    #94A3B8;
-      --text-muted:  #475569;
-      --fd:          'Syne', sans-serif;
-      --fb:          'Plus Jakarta Sans', sans-serif;
-      --r:           16px;
-      --tr:          0.3s cubic-bezier(.4,0,.2,1);
-      --shadow-card: 0 24px 60px rgba(0,0,0,0.6);
-      --glow:        0 0 40px rgba(6,182,212,0.18);
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--fb);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--cyan-20); border-radius: 5px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
-    a { text-decoration: none; }
-    img { display: block; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hashaam Tanveer — AI & Automation Systems Architect</title>
+<meta name="description" content="AI Automation Specialist and HubSpot Super Admin building CRM automation systems, marketing workflows, and integrations using n8n, Zapier and enterprise marketing tools.">
 
-    /* ─── TYPOGRAPHY HELPERS ─── */
-    .label {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--cyan);
-      margin-bottom: .85rem;
-    }
-    .label::before {
-      content: ''; display: block;
-      width: 28px; height: 1.5px; background: var(--cyan);
-      flex-shrink: 0;
-    }
-    .section-h {
-      font-family: var(--fd);
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      font-weight: 700; letter-spacing: -.04em; line-height: 1.08;
-      margin-bottom: .85rem;
-    }
-    .section-h .g {
-      background: linear-gradient(120deg, var(--cyan) 20%, var(--purple) 80%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .section-p {
-      color: var(--text-sub); font-size: 1.05rem;
-      max-width: 520px; margin-bottom: 3.5rem; line-height: 1.75;
-    }
-    .container { max-width: 1240px; margin: 0 auto; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    /* ─── BUTTONS ─── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 13px 28px; border-radius: 50px;
-      font-family: var(--fb); font-weight: 600; font-size: .88rem;
-      letter-spacing: .01em; transition: var(--tr); cursor: pointer;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      color: #fff;
-      box-shadow: 0 8px 32px rgba(6,182,212,0.22);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 44px rgba(6,182,212,0.4);
-    }
-    .btn-outline {
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover {
-      border-color: var(--cyan); color: var(--cyan);
-      transform: translateY(-2px);
-    }
+<style>
+/* ─── RESET & BASE ───────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
 
-    /* ─── DIVIDER ─── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
-    }
+:root {
+  --bg:        #021a17;
+  --bg-2:      #031e1a;
+  --bg-card:   rgba(4, 45, 40, 0.55);
+  --border:    rgba(0,255,204,0.12);
+  --border-hover: rgba(0,255,204,0.45);
+  --accent:    #00ffcc;
+  --accent-dim:#00c9a0;
+  --text:      #e6fffa;
+  --text-muted:#7ec8bb;
+  --text-dim:  #4a9e90;
+  --glow:      0 0 40px rgba(0,255,204,0.18);
+  --glow-sm:   0 0 16px rgba(0,255,204,0.25);
+  --radius:    16px;
+  --radius-lg: 24px;
+  --transition: 0.35s cubic-bezier(0.25,0.8,0.25,1);
+}
 
-    /* ════════════════════
-        NAV
-    ════════════════════ */
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: 68px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%;
-      backdrop-filter: blur(24px) saturate(200%);
-      background: rgba(7,9,15,0.72);
-      border-bottom: 1px solid var(--border);
-      transition: background var(--tr);
-    }
-    #nav.scrolled { background: rgba(7,9,15,0.96); }
-    .nav-logo {
-      font-family: var(--fd); font-weight: 800; font-size: 1.1rem;
-      letter-spacing: -.03em; color: var(--text);
-    }
-    .nav-logo em { color: var(--cyan); font-style: normal; }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-    .nav-links a {
-      font-size: .83rem; font-weight: 500; letter-spacing: .04em;
-      color: var(--text-sub); transition: color var(--tr); position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -5px; left: 0; right: 0;
-      height: 1px; background: var(--cyan);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform var(--tr);
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-    .nav-hire {
-      padding: 8px 22px;
-      border: 1.5px solid rgba(6,182,212,0.5);
-      border-radius: 50px;
-      color: var(--cyan); font-size: .8rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      transition: var(--tr);
-    }
-    .nav-hire:hover { background: var(--cyan); color: var(--bg); border-color: var(--cyan); }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 5px;
-    }
-    .hamburger span {
-      display: block; width: 22px; height: 2px;
-      background: var(--text); border-radius: 2px; transition: var(--tr);
-    }
-    .mobile-menu {
-      display: none; position: fixed;
-      top: 68px; left: 0; right: 0; z-index: 190;
-      flex-direction: column;
-      background: rgba(7,9,15,0.98);
-      backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
-      padding: 2rem 5%;
-      gap: 1.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 1rem; font-weight: 500;
-      color: var(--text-sub); transition: color var(--tr);
-    }
-    .mobile-menu a:hover { color: var(--cyan); }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
 
-    /* ════════════════════
-        HERO
-    ════════════════════ */
-    #hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 120px 5% 90px;
-      position: relative; overflow: hidden;
-    }
-    /* Background atmosphere */
-    .hero-atm {
-      position: absolute; inset: 0; pointer-events: none; z-index: 0;
-    }
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(90px); opacity: .3;
-    }
-    .orb-1 {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, #06B6D4 0%, transparent 65%);
-      top: -200px; right: -180px;
-      animation: drift1 14s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 550px; height: 550px;
-      background: radial-gradient(circle, #8B5CF6 0%, transparent 65%);
-      bottom: -200px; left: -150px;
-      animation: drift2 17s ease-in-out infinite;
-    }
-    .orb-3 {
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, #06B6D4 0%, transparent 70%);
-      top: 45%; left: 38%;
-      opacity: .12;
-      animation: drift1 20s ease-in-out infinite reverse;
-    }
-    @keyframes drift1 {
-      0%,100% { transform: translate(0,0) scale(1); }
-      40%  { transform: translate(30px,-25px) scale(1.06); }
-      70%  { transform: translate(-18px, 18px) scale(.95); }
-    }
-    @keyframes drift2 {
-      0%,100% { transform: translate(0,0) scale(1); }
-      35%  { transform: translate(-22px, 28px) scale(1.05); }
-      65%  { transform: translate(16px,-14px) scale(.96); }
-    }
-    /* Dot-grid overlay */
-    .hero-dots {
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(6,182,212,.06) 1px, transparent 1px);
-      background-size: 38px 38px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-    }
-    /* Diagonal scan lines accent */
-    .hero-scan {
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(
-        -55deg,
-        transparent, transparent 48px,
-        rgba(6,182,212,.015) 48px, rgba(6,182,212,.015) 49px
-      );
-    }
-    .hero-inner {
-      position: relative; z-index: 1;
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 4.5rem; align-items: center;
-      max-width: 1240px; margin: 0 auto; width: 100%;
-    }
-    /* Badge */
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 6px 18px;
-      background: rgba(6,182,212,.08);
-      border: 1px solid rgba(6,182,212,.22);
-      border-radius: 50px;
-      font-size: .75rem; font-weight: 700; letter-spacing: .07em;
-      color: var(--cyan); text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      animation: up .6s ease both;
-    }
-    .pulse-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--cyan);
-      animation: pulseDot 2.2s ease infinite;
-    }
-    @keyframes pulseDot {
-      0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,.5); }
-      50%      { box-shadow: 0 0 0 5px rgba(6,182,212,0); }
-    }
-    .hero-h1 {
-      font-family: var(--fd);
-      font-size: clamp(3rem, 5.8vw, 5rem);
-      font-weight: 800; letter-spacing: -.05em; line-height: 1.02;
-      margin-bottom: 1.35rem;
-      animation: up .6s .08s ease both;
-    }
-    .hero-h1 .grad {
-      background: linear-gradient(115deg, var(--cyan) 10%, var(--purple) 75%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      color: var(--text-sub); font-size: 1.08rem; line-height: 1.78;
-      max-width: 510px; margin-bottom: 1.9rem;
-      animation: up .6s .16s ease both;
-    }
-    .hero-chips {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 2.5rem;
-      animation: up .6s .22s ease both;
-    }
-    .chip {
-      padding: 5px 14px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 50px;
-      font-size: .76rem; font-weight: 500;
-      color: var(--text-sub); letter-spacing: .02em;
-    }
-    .hero-btns {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: up .6s .28s ease both;
-    }
+/* ─── GRAIN TEXTURE ──────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
 
-    /* Profile ring */
-    .photo-wrap {
-      animation: up .8s .1s ease both;
-      flex-shrink: 0;
-    }
-    .photo-ring {
-      position: relative; width: 290px; height: 290px;
-    }
-    .photo-ring::before {
-      content: ''; position: absolute; inset: -4px; border-radius: 50%;
-      background: conic-gradient(var(--cyan), var(--purple), var(--cyan));
-      animation: spinRing 9s linear infinite;
-      z-index: 0;
-    }
-    .photo-ring::after {
-      content: ''; position: absolute; inset: -4px; border-radius: 50%;
-      background: conic-gradient(var(--cyan), var(--purple), var(--cyan));
-      animation: spinRing 9s linear infinite;
-      filter: blur(14px); opacity: .35;
-      z-index: -1;
-    }
-    @keyframes spinRing { to { transform: rotate(360deg); } }
-    .photo-ring img {
-      position: relative; z-index: 1;
-      width: 100%; height: 100%; border-radius: 50%;
-      object-fit: cover; border: 5px solid var(--bg);
-    }
-    .photo-badge {
-      position: absolute; bottom: 12px; right: -14px; z-index: 2;
-      padding: 8px 15px;
-      background: rgba(7,9,15,.95);
-      border: 1px solid rgba(6,182,212,.28);
-      border-radius: 50px;
-      font-size: .73rem; font-weight: 700;
-      color: var(--cyan); white-space: nowrap;
-      backdrop-filter: blur(12px);
-      letter-spacing: .03em;
-    }
+/* ─── AMBIENT GLOW ───────────────────────────────────────── */
+.ambient {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,255,204,0.06) 0%, transparent 70%);
+  top: -100px; left: -150px;
+}
+.ambient-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,191,166,0.05) 0%, transparent 70%);
+  bottom: 10%; right: -100px;
+}
 
-    @keyframes up {
-      from { opacity: 0; transform: translateY(26px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+/* ─── NAVBAR ─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0 8%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2,26,23,0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+}
 
-    @media (max-width: 960px) {
-      .nav-links, .nav-hire { display: none; }
-      .hamburger { display: flex; }
-      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
-      .photo-wrap { order: -1; display: flex; justify-content: center; }
-      .photo-ring { width: 210px; height: 210px; }
-      .photo-badge { right: -8px; bottom: 6px; }
-      .hero-chips, .hero-btns { justify-content: center; }
-      .hero-sub { margin-inline: auto; }
-    }
-    @media (max-width: 480px) {
-      .hero-h1 { font-size: 2.6rem; }
-    }
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo span {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: var(--glow-sm);
+}
 
-    /* ════════════════════
-        PROJECTS
-    ════════════════════ */
-    #projects {
-      padding: 110px 5%;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    @media (max-width: 1050px) { .projects-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 600px)  { .projects-grid { grid-template-columns: 1fr; } }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: var(--transition);
+  letter-spacing: 0.02em;
+}
+.nav-links a:hover { color: var(--accent); background: rgba(0,255,204,0.07); }
 
-    .pcard {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform var(--tr), border-color var(--tr), box-shadow var(--tr);
-    }
-    .pcard:hover {
-      transform: translateY(-7px);
-      border-color: var(--border-h);
-      box-shadow: var(--shadow-card), var(--glow);
-    }
-    .pcard-img {
-      position: relative; aspect-ratio: 16/9; overflow: hidden;
-      background: #0B1020;
-    }
-    .pcard-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .55s ease;
-    }
-    .pcard:hover .pcard-img img { transform: scale(1.06); }
-    /* gradient fade */
-    .pcard-img::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(7,9,15,.72) 100%);
-    }
-    .pcard-tag {
-      position: absolute; top: 12px; left: 12px; z-index: 1;
-      padding: 4px 12px;
-      background: rgba(7,9,15,.78);
-      border: 1px solid rgba(6,182,212,.3);
-      border-radius: 50px; font-size: .68rem; font-weight: 700;
-      color: var(--cyan); letter-spacing: .08em; text-transform: uppercase;
-      backdrop-filter: blur(8px);
-    }
-    .pcard-hover-cta {
-      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%) translateY(6px);
-      z-index: 1;
-      padding: 7px 20px;
-      background: var(--cyan); color: var(--bg);
-      border-radius: 50px; font-size: .73rem; font-weight: 800;
-      letter-spacing: .06em; text-transform: uppercase;
-      opacity: 0; transition: opacity var(--tr), transform var(--tr);
-      white-space: nowrap;
-    }
-    .pcard:hover .pcard-hover-cta { opacity: 1; transform: translateX(-50%) translateY(0); }
-    .pcard-body { padding: 1.35rem 1.5rem 1.6rem; }
-    .pcard-title {
-      font-family: var(--fd); font-size: 1.02rem; font-weight: 700;
-      letter-spacing: -.02em; margin-bottom: .45rem; color: var(--text);
-    }
-    .pcard-desc {
-      font-size: .84rem; color: var(--text-sub);
-      line-height: 1.7; margin-bottom: 1rem;
-    }
-    .pcard-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .pchip {
-      padding: 3px 10px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 50px;
-      font-size: .7rem; color: var(--text-sub); font-weight: 500;
-    }
+.nav-cta {
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--accent-dim) !important; transform: translateY(-1px); }
 
-    /* ─── MODAL ─── */
-    .m-overlay {
-      position: fixed; inset: 0; z-index: 900;
-      background: rgba(0,0,0,.82);
-      backdrop-filter: blur(16px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem;
-      opacity: 0; pointer-events: none;
-      transition: opacity .28s ease;
-    }
-    .m-overlay.open { opacity: 1; pointer-events: all; }
-    .m-box {
-      background: #0D1325;
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 22px;
-      max-width: 740px; width: 100%;
-      max-height: 90vh; overflow-y: auto;
-      transform: scale(.88) translateY(22px);
-      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
-      position: relative;
-    }
-    .m-overlay.open .m-box { transform: scale(1) translateY(0); }
-    .m-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 22px 22px 0 0; }
-    .m-body { padding: 2rem 2.2rem 2.4rem; }
-    .m-tag {
-      display: inline-block; padding: 4px 14px;
-      background: var(--cyan-10); border: 1px solid var(--cyan-20);
-      border-radius: 50px; font-size: .72rem; font-weight: 700;
-      color: var(--cyan); letter-spacing: .07em; text-transform: uppercase;
-      margin-bottom: .9rem;
-    }
-    .m-title {
-      font-family: var(--fd); font-size: 1.65rem; font-weight: 700;
-      letter-spacing: -.03em; margin-bottom: .9rem;
-    }
-    .m-desc { color: var(--text-sub); line-height: 1.8; }
-    .m-close {
-      position: absolute; top: 14px; right: 14px;
-      width: 34px; height: 34px;
-      background: rgba(255,255,255,.07); border: none;
-      border-radius: 50%; color: var(--text);
-      font-size: 1.1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background var(--tr);
-    }
-    .m-close:hover { background: rgba(255,255,255,.14); }
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 10% 80px;
+  position: relative;
+  overflow: hidden;
+}
 
-    /* ════════════════════
-        TECH STACK
-    ════════════════════ */
-    #stack {
-      padding: 90px 0;
-      background: var(--bg-2);
-      overflow: hidden;
-    }
-    #stack .container { padding-inline: 5%; margin-bottom: 2.8rem; }
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,204,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,204,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+}
 
-    .scroll-track-wrap {
-      position: relative; overflow: hidden;
-      padding: .6rem 0;
-    }
-    .scroll-track-wrap + .scroll-track-wrap { margin-top: 1.2rem; }
-    /* Edge fades */
-    .scroll-track-wrap::before,
-    .scroll-track-wrap::after {
-      content: ''; position: absolute; top: 0; bottom: 0;
-      width: 180px; z-index: 2; pointer-events: none;
-    }
-    .scroll-track-wrap::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg-2), transparent);
-    }
-    .scroll-track-wrap::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg-2), transparent);
-    }
-    .scroll-track {
-      display: flex; gap: 1rem;
-      width: max-content;
-      animation: marquee 32s linear infinite;
-    }
-    .scroll-track-rev { animation-direction: reverse; animation-duration: 36s; }
-    .scroll-track:hover { animation-play-state: paused; }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .logo-pill {
-      display: flex; align-items: center; gap: 10px;
-      height: 48px; padding: 0 22px;
-      background: rgba(255,255,255,.032);
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 50px; flex-shrink: 0;
-      transition: border-color var(--tr), background var(--tr);
-    }
-    .logo-pill:hover {
-      border-color: rgba(6,182,212,.3);
-      background: rgba(6,182,212,.05);
-    }
-    .logo-pill img {
-      height: 22px; width: auto; max-width: 90px; object-fit: contain;
-      filter: brightness(0) invert(.65);
-      transition: filter var(--tr);
-    }
-    .logo-pill:hover img { filter: brightness(0) invert(1); }
-    .logo-pill span {
-      font-size: .78rem; font-weight: 600;
-      color: var(--text-muted); white-space: nowrap;
-      transition: color var(--tr);
-    }
-    .logo-pill:hover span { color: var(--text-sub); }
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
 
-    /* ════════════════════
-        IMPACT
-    ════════════════════ */
-    #impact {
-      padding: 110px 5%;
-      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
-    }
-    .impact-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1.5rem;
-    }
-    @media (max-width: 700px) { .impact-grid { grid-template-columns: 1fr; } }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(0,255,204,0.07);
+  border: 1px solid rgba(0,255,204,0.2);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity:0.4; transform: scale(0.7); }
+}
 
-    .icard {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      position: relative; overflow: hidden;
-      transition: transform var(--tr), border-color var(--tr), box-shadow var(--tr);
-    }
-    .icard::before {
-      content: ''; position: absolute;
-      top: 0; left: 20%; right: 20%; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-      opacity: 0; transition: opacity var(--tr);
-    }
-    .icard::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(6,182,212,.05), transparent 70%);
-      opacity: 0; transition: opacity var(--tr);
-    }
-    .icard:hover { transform: translateY(-5px); border-color: var(--cyan-20); box-shadow: 0 20px 50px rgba(0,0,0,.45); }
-    .icard:hover::before { opacity: 1; }
-    .icard:hover::after { opacity: 1; }
-    .icard-icon {
-      width: 54px; height: 54px;
-      background: var(--cyan-10); border: 1px solid var(--cyan-20);
-      border-radius: 16px;
-      margin: 0 auto 1.4rem;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.55rem;
-    }
-    .icard-num {
-      font-family: var(--fd); font-size: 4rem; font-weight: 800;
-      letter-spacing: -.05em; line-height: 1;
-      background: linear-gradient(135deg, var(--cyan) 20%, var(--purple) 80%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: .35rem;
-    }
-    .icard-suffix {
-      font-family: var(--fd); font-size: 1.6rem; font-weight: 800;
-      letter-spacing: -.03em; line-height: 1;
-      background: linear-gradient(135deg, var(--cyan) 20%, var(--purple) 80%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: .7rem;
-    }
-    .icard-label {
-      font-size: .88rem; color: var(--text-sub);
-      font-weight: 500; line-height: 1.5;
-    }
+.hero-content h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
 
-    /* ════════════════════
-        CONTACT
-    ════════════════════ */
-    #contact {
-      padding: 120px 5%;
-      position: relative; overflow: hidden;
-      text-align: center;
-    }
-    .contact-glow {
-      position: absolute; inset: 0; pointer-events: none;
-    }
-    .contact-glow::before {
-      content: ''; position: absolute;
-      width: 700px; height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(6,182,212,.14), transparent 65%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .contact-inner {
-      position: relative; z-index: 1;
-      max-width: 680px; margin: 0 auto;
-    }
-    .contact-inner .label { justify-content: center; }
-    .contact-h {
-      font-family: var(--fd);
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 800; letter-spacing: -.05em; line-height: 1.06;
-      margin-bottom: 1.2rem;
-    }
-    .contact-p {
-      color: var(--text-sub); font-size: 1.08rem;
-      line-height: 1.78; margin-bottom: 2.8rem;
-    }
-    .contact-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .services {
-      display: flex; gap: .75rem;
-      justify-content: center; flex-wrap: wrap;
-    }
-    .svc {
-      padding: 6px 16px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 50px;
-      font-size: .78rem; font-weight: 500;
-      color: var(--text-muted);
-    }
+.hero-content h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #00ffcc 0%, #00e0b3 40%, #00bfa6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-    /* ════════════════════
-        FOOTER
-    ════════════════════ */
-    footer {
-      padding: 1.8rem 5%;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: center;
-      justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-copy { font-size: .82rem; color: var(--text-muted); }
-    .footer-links { display: flex; gap: 1.8rem; list-style: none; }
-    .footer-links a { font-size: .82rem; color: var(--text-muted); transition: color var(--tr); }
-    .footer-links a:hover { color: var(--cyan); }
+.hero-content h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  margin-bottom: 24px;
+}
 
-    /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity .75s ease, transform .75s ease;
-    }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: .1s; }
-    .d2 { transition-delay: .2s; }
-    .d3 { transition-delay: .3s; }
-  </style>
+.hero-desc {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.tag {
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: rgba(0,255,204,0.06);
+  border: 1px solid rgba(0,255,204,0.14);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #021a17;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+  box-shadow: 0 0 30px rgba(0,255,204,0.25);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 40px rgba(0,255,204,0.38); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 10px;
+  border: 1px solid var(--border-hover);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+.btn-outline:hover { background: rgba(0,255,204,0.06); border-color: var(--accent); transform: translateY(-3px); }
+
+/* Profile visual */
+.hero-visual { position: relative; flex-shrink: 0; }
+.profile-ring {
+  position: relative;
+  width: 220px; height: 220px;
+}
+.profile-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent), transparent 60%, var(--accent));
+  animation: spin 6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.profile-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(from 180deg, transparent 60%, var(--accent-dim));
+  animation: spin 6s linear infinite;
+}
+.profile-img {
+  position: relative;
+  z-index: 1;
+  width: 214px; height: 214px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg);
+  display: block;
+  margin: 3px;
+}
+.profile-glow {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,204,0.12) 0%, transparent 65%);
+  z-index: 0;
+}
+
+/* ─── SECTIONS SHARED ────────────────────────────────────── */
+section { padding: 100px 10%; position: relative; z-index: 1; }
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.section-label::before {
+  content: '';
+  width: 20px; height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.section-sub {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.75;
+  margin-bottom: 60px;
+}
+
+/* ─── DIVIDER ────────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* ─── PROJECTS ───────────────────────────────────────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,255,204,0.04) 0%, transparent 60%);
+  opacity: 0;
+  transition: var(--transition);
+}
+.project-card:hover { transform: translateY(-8px); border-color: var(--border-hover); box-shadow: var(--glow); }
+.project-card:hover::before { opacity: 1; }
+
+.project-thumb {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+.project-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.project-card:hover .project-thumb img { transform: scale(1.06); }
+.project-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2,26,23,0.7) 0%, transparent 55%);
+}
+
+.project-body { padding: 22px 24px 24px; }
+.project-category {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.project-body h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.project-body p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.project-result {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(0,255,204,0.07);
+  border: 1px solid rgba(0,255,204,0.16);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.project-result::before { content: '↑'; font-size: 11px; }
+
+/* ─── MODAL ──────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-overlay img {
+  max-width: min(92vw, 1100px);
+  max-height: 88vh;
+  border-radius: 14px;
+  box-shadow: 0 0 80px rgba(0,255,204,0.12);
+  transform: scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-overlay.open img { transform: scale(1); }
+.modal-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(0,255,204,0.1);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.modal-close:hover { background: rgba(0,255,204,0.2); }
+
+/* ─── TECH STACK ─────────────────────────────────────────── */
+#stack { background: var(--bg-2); }
+
+.logo-carousel {
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+.logo-carousel:hover .logo-track { animation-play-state: paused; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.logo-item img {
+  height: 36px;
+  width: auto;
+  max-width: 90px;
+  object-fit: contain;
+  filter: brightness(0.7) saturate(0);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.logo-carousel:hover .logo-item:hover img {
+  filter: brightness(1) saturate(1);
+  transform: scale(1.1);
+}
+.logo-item span {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ─── METRICS ────────────────────────────────────────────── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+.metric-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+.metric-card:hover { transform: translateY(-6px); border-color: var(--border-hover); }
+.metric-card:hover::before { opacity: 1; }
+
+.metric-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(0,255,204,0.08);
+  border: 1px solid rgba(0,255,204,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.metric-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.metric-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.metric-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ─── EXPERTISE ──────────────────────────────────────────── */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.expertise-item {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: var(--transition);
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.expertise-item:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+.expertise-icon {
+  font-size: 22px;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  background: rgba(0,255,204,0.07);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.expertise-text h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.expertise-text p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* ─── CONTACT ────────────────────────────────────────────── */
+#contact { background: var(--bg-2); }
+.contact-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 72px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 400px; height: 300px;
+  background: radial-gradient(ellipse, rgba(0,255,204,0.08) 0%, transparent 70%);
+}
+.contact-card h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+.contact-card p {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto 38px;
+  line-height: 1.75;
+}
+.contact-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer {
+  padding: 40px 10%;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-left {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+}
+.footer-left span { color: var(--accent); }
+.footer-right { font-size: 13px; color: var(--text-dim); }
+
+/* ─── REVEAL ─────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─── MOBILE ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 0 5%; }
+  .nav-links a { display: none; }
+  .nav-links a.nav-cta { display: inline-flex; }
+  section { padding: 80px 6%; }
+  .hero { padding: 100px 6% 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { order: -1; }
+  .profile-ring { width: 160px; height: 160px; }
+  .profile-img { width: 154px; height: 154px; }
+  .contact-card { padding: 48px 28px; }
+  footer { flex-direction: column; text-align: center; }
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 10px; }
+</style>
 </head>
+
 <body>
 
-<!-- ═══ NAV ═══ -->
-<nav id="nav">
-  <a href="#hero" class="nav-logo">Hashaam<em>.</em></a>
-  <ul class="nav-links">
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#impact">Impact</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:hashaamtanveerk@gmail.com" class="nav-hire">Hire Me</a>
-  <div class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
+<!-- Ambient glow orbs -->
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+
+<!-- ─── NAVBAR ──────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo"><span></span>Hashaam Tanveer</a>
+  <div class="nav-links">
+    <a href="#expertise">Expertise</a>
+    <a href="#projects">Work</a>
+    <a href="#stack">Stack</a>
+    <a href="#impact">Impact</a>
+    <a href="#contact" class="nav-cta">Contact →</a>
   </div>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#projects" onclick="closeMobile()">Projects</a>
-  <a href="#stack"    onclick="closeMobile()">Stack</a>
-  <a href="#impact"   onclick="closeMobile()">Impact</a>
-  <a href="#contact"  onclick="closeMobile()">Contact</a>
-  <a href="mailto:hashaamtanveerk@gmail.com" class="btn btn-primary" style="justify-content:center">Hire Me</a>
-</div>
 
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="hero-atm">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="hero-dots"></div>
-    <div class="hero-scan"></div>
-  </div>
-
+<!-- ─── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-grid-lines"></div>
   <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge"><span class="pulse-dot"></span>Available for Projects</div>
-      <h1 class="hero-h1">
-        AI &amp; Automation<br>
-        <span class="grad">Systems Architect</span>
-      </h1>
-      <p class="hero-sub">
-        Marketing automation specialist building revenue-driving CRM systems,
-        workflow automation, and RevOps infrastructure — using HubSpot, n8n,
-        Zapier, and enterprise-grade marketing platforms.
+    <div class="hero-content reveal">
+      <div class="hero-badge">Available for Projects</div>
+      <h1>Hashaam<br><em>Tanveer</em></h1>
+      <h2>AI & Automation Systems Architect</h2>
+      <p class="hero-desc">
+        I design and engineer intelligent CRM architectures, marketing automation systems, and revenue operations infrastructure that scale businesses globally.
       </p>
-      <div class="hero-chips">
-        <span class="chip">HubSpot Super Admin</span>
-        <span class="chip">n8n</span>
-        <span class="chip">Zapier</span>
-        <span class="chip">Dynamics 365</span>
-        <span class="chip">CRM Architecture</span>
-        <span class="chip">RevOps</span>
+      <div class="hero-tags">
+        <span class="tag">HubSpot CRM</span>
+        <span class="tag">n8n Automations</span>
+        <span class="tag">Zapier</span>
+        <span class="tag">Dynamics 365</span>
+        <span class="tag">ClickUp</span>
+        <span class="tag">Revenue Operations</span>
+        <span class="tag">Workflow Engineering</span>
       </div>
-      <div class="hero-btns">
-        <a href="https://hashaamtak.github.io/Hashaam_Tanveer_Resume.pdf"
-           class="btn btn-primary" target="_blank">
-          ↓&nbsp; Download Resume
+      <div class="hero-actions">
+        <a href="Hashaam_Tanveer_Resume.pdf" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume
         </a>
-        <a href="https://www.linkedin.com/in/hashaamtanveerhtk/"
-           class="btn btn-outline" target="_blank">
-          LinkedIn &nbsp;→
+        <a href="https://www.linkedin.com/in/hashaamtanveerhtk/" target="_blank" class="btn-outline">
+          LinkedIn Profile →
         </a>
       </div>
     </div>
 
-    <div class="photo-wrap">
-      <div class="photo-ring">
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="profile-glow"></div>
+      <div class="profile-ring">
         <img
-          src="https://hashaamtak.github.io/images/Hashaam%20pic.png"
+          class="profile-img"
+          src="images/Hashaam pic.png"
+          onerror="this.src='https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&crop=face'"
           alt="Hashaam Tanveer"
-          onerror="this.src='https://ui-avatars.com/api/?name=Hashaam+Tanveer&size=290&background=06B6D4&color=07090F&bold=true&format=png'"
         >
-        <div class="photo-badge">🏆 HubSpot Super Admin</div>
       </div>
     </div>
   </div>
@@ -768,373 +780,445 @@
 
 <div class="divider"></div>
 
-<!-- ═══ PROJECTS ═══ -->
+<!-- ─── EXPERTISE ───────────────────────────────────────── -->
+<section id="expertise">
+  <div class="reveal">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">What I Build</h2>
+    <p class="section-sub">End-to-end automation infrastructure designed to eliminate manual work, accelerate pipelines, and unlock revenue at scale.</p>
+  </div>
+  <div class="expertise-grid">
+    <div class="expertise-item reveal reveal-delay-1">
+      <div class="expertise-icon">🏗️</div>
+      <div class="expertise-text">
+        <h4>CRM Architecture</h4>
+        <p>Designing scalable HubSpot & Dynamics 365 CRM systems with structured data models and clean pipelines.</p>
+      </div>
+    </div>
+    <div class="expertise-item reveal reveal-delay-2">
+      <div class="expertise-icon">⚙️</div>
+      <div class="expertise-text">
+        <h4>Workflow Automation</h4>
+        <p>Building complex automation flows in n8n and Zapier that handle lead routing, scoring, and lifecycle triggers.</p>
+      </div>
+    </div>
+    <div class="expertise-item reveal reveal-delay-3">
+      <div class="expertise-icon">📊</div>
+      <div class="expertise-text">
+        <h4>Marketing Systems</h4>
+        <p>Engineering full-funnel campaign automation — webinar sequences, nurture workflows, and re-engagement programs.</p>
+      </div>
+    </div>
+    <div class="expertise-item reveal reveal-delay-1">
+      <div class="expertise-icon">🔗</div>
+      <div class="expertise-text">
+        <h4>Systems Integration</h4>
+        <p>Connecting CRMs, ad platforms, project tools, and data warehouses into seamless revenue operations stacks.</p>
+      </div>
+    </div>
+    <div class="expertise-item reveal reveal-delay-2">
+      <div class="expertise-icon">📋</div>
+      <div class="expertise-text">
+        <h4>Project Workspace Setup</h4>
+        <p>Architecting ClickUp and Wrike environments with structured templates, dashboards, and automated status updates.</p>
+      </div>
+    </div>
+    <div class="expertise-item reveal reveal-delay-3">
+      <div class="expertise-icon">🌏</div>
+      <div class="expertise-text">
+        <h4>Global RevOps Infrastructure</h4>
+        <p>Systems supporting multi-region operations across US, UK, Australia and Canada markets simultaneously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROJECTS ────────────────────────────────────────── -->
 <section id="projects">
-  <div class="container">
-    <div class="reveal">
-      <p class="label">Case Studies</p>
-      <h2 class="section-h">Automation <span class="g">Case Studies</span></h2>
-      <p class="section-p">Real-world automation systems built to eliminate manual work, accelerate pipelines, and scale revenue operations.</p>
+  <div class="reveal">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">Automation Systems Built</h2>
+    <p class="section-sub">A selection of real automation infrastructure built across CRM, marketing, and operations — each delivering measurable business outcomes.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal reveal-delay-1" onclick="openModal('images/Dashboard HubSpot.png','https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80')">
+      <div class="project-thumb">
+        <img
+          src="images/Dashboard HubSpot.png"
+          onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'"
+          alt="HubSpot Analytics Dashboard"
+        >
+        <div class="project-thumb-overlay"></div>
+      </div>
+      <div class="project-body">
+        <div class="project-category">HubSpot · Analytics</div>
+        <h3>HubSpot Analytics Dashboard</h3>
+        <p>Custom CRM reporting dashboard consolidating pipeline metrics, email performance, and lead attribution into a single executive view.</p>
+        <span class="project-result">Real-time pipeline visibility</span>
+      </div>
     </div>
-    <div class="projects-grid">
 
-      <div class="pcard reveal"    onclick="openM(0)">
-        <div class="pcard-img">
-          <span class="pcard-tag">Analytics</span>
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80" alt="HubSpot Analytics Dashboard" loading="lazy">
-          <span class="pcard-hover-cta">View Case Study</span>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-title">HubSpot Analytics Dashboard</div>
-          <p class="pcard-desc">Multi-pipeline analytics dashboard tracking MQL-to-SQL conversion, revenue attribution, and campaign ROI in real time for leadership decision-making.</p>
-          <div class="pcard-chips">
-            <span class="pchip">HubSpot</span>
-            <span class="pchip">Revenue Reporting</span>
-            <span class="pchip">CRM Analytics</span>
-          </div>
-        </div>
+    <div class="project-card reveal reveal-delay-2" onclick="openModal('images/Lead pass Workflow.png','https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80')">
+      <div class="project-thumb">
+        <img
+          src="images/Lead pass Workflow.png"
+          onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80'"
+          alt="Lead Routing Automation"
+        >
+        <div class="project-thumb-overlay"></div>
       </div>
-
-      <div class="pcard reveal d1" onclick="openM(1)">
-        <div class="pcard-img">
-          <span class="pcard-tag">Automation</span>
-          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Lead Routing Automation" loading="lazy">
-          <span class="pcard-hover-cta">View Case Study</span>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-title">Lead Routing Automation</div>
-          <p class="pcard-desc">Intelligent HubSpot workflows routing 500+ monthly leads by territory, product line, and rep capacity — reducing manual assignment by 30%.</p>
-          <div class="pcard-chips">
-            <span class="pchip">HubSpot Workflows</span>
-            <span class="pchip">Lead Scoring</span>
-            <span class="pchip">Sales Ops</span>
-          </div>
-        </div>
+      <div class="project-body">
+        <div class="project-category">HubSpot · Lead Management</div>
+        <h3>Intelligent Lead Routing Automation</h3>
+        <p>Multi-branch lead assignment workflow scoring and routing inbound leads to the right rep based on region, source, and deal value.</p>
+        <span class="project-result">30% reduction in manual assignment</span>
       </div>
-
-      <div class="pcard reveal d2" onclick="openM(2)">
-        <div class="pcard-img">
-          <span class="pcard-tag">Lifecycle</span>
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80" alt="Webinar Lifecycle Workflow" loading="lazy">
-          <span class="pcard-hover-cta">View Case Study</span>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-title">Webinar Lifecycle Workflow</div>
-          <p class="pcard-desc">End-to-end webinar automation from registration to post-event nurture, with attendee segmentation, follow-up sequences, and pipeline handoff.</p>
-          <div class="pcard-chips">
-            <span class="pchip">HubSpot</span>
-            <span class="pchip">Email Automation</span>
-            <span class="pchip">Segmentation</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pcard reveal" onclick="openM(3)">
-        <div class="pcard-img">
-          <span class="pcard-tag">Campaigns</span>
-          <img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=900&q=80" alt="Education Campaign System" loading="lazy">
-          <span class="pcard-hover-cta">View Case Study</span>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-title">Education Campaign System</div>
-          <p class="pcard-desc">Multi-channel campaign system with behavioral triggers, A/B testing, and automated enrollment journeys across US, UK, Australia &amp; Canada markets.</p>
-          <div class="pcard-chips">
-            <span class="pchip">Multi-Channel</span>
-            <span class="pchip">A/B Testing</span>
-            <span class="pchip">Global Campaigns</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pcard reveal d1" onclick="openM(4)">
-        <div class="pcard-img">
-          <span class="pcard-tag">Project Mgmt</span>
-          <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=900&q=80" alt="Wrike Workspace Setup" loading="lazy">
-          <span class="pcard-hover-cta">View Case Study</span>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-title">Wrike Workspace Setup</div>
-          <p class="pcard-desc">Full marketing operations workspace in Wrike with custom workflows, intake forms, multi-stage approval chains, and cross-functional visibility dashboards.</p>
-          <div class="pcard-chips">
-            <span class="pchip">Wrike</span>
-            <span class="pchip">Project Architecture</span>
-            <span class="pchip">Team Ops</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pcard reveal d2" onclick="openM(5)">
-        <div class="pcard-img">
-          <span class="pcard-tag">Architecture</span>
-          <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=900&q=80" alt="Wrike Workflow Architecture" loading="lazy">
-          <span class="pcard-hover-cta">View Case Study</span>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-title">Wrike Workflow Architecture</div>
-          <p class="pcard-desc">Scalable Wrike architecture supporting 20+ concurrent campaigns with automated status updates, stakeholder reports, and resource allocation views.</p>
-          <div class="pcard-chips">
-            <span class="pchip">Wrike</span>
-            <span class="pchip">Automation</span>
-            <span class="pchip">Workflow Design</span>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="project-card reveal reveal-delay-3" onclick="openModal('images/Webinar wf.png','https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80')">
+      <div class="project-thumb">
+        <img
+          src="images/Webinar wf.png"
+          onerror="this.src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80'"
+          alt="Webinar Lifecycle Workflow"
+        >
+        <div class="project-thumb-overlay"></div>
+      </div>
+      <div class="project-body">
+        <div class="project-category">HubSpot · Marketing</div>
+        <h3>Webinar Lifecycle Workflow</h3>
+        <p>End-to-end automated sequence handling webinar registration, reminders, attendance tracking, and post-event nurture paths.</p>
+        <span class="project-result">Fully automated attendee journey</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-1" onclick="openModal('images/Education Campaign.png','https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&q=80')">
+      <div class="project-thumb">
+        <img
+          src="images/Education Campaign.png"
+          onerror="this.src='https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800&q=80'"
+          alt="Education Campaign System"
+        >
+        <div class="project-thumb-overlay"></div>
+      </div>
+      <div class="project-body">
+        <div class="project-category">HubSpot · Campaigns</div>
+        <h3>Education Campaign System</h3>
+        <p>Multi-touch drip campaign system for education verticals with conditional branching based on content engagement and lead stage.</p>
+        <span class="project-result">Personalised multi-touch nurture</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-2" onclick="openModal('images/wrike1.png','https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=1200&q=80')">
+      <div class="project-thumb">
+        <img
+          src="images/wrike1.png"
+          onerror="this.src='https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800&q=80'"
+          alt="Wrike Workspace Setup"
+        >
+        <div class="project-thumb-overlay"></div>
+      </div>
+      <div class="project-body">
+        <div class="project-category">Wrike · Project Management</div>
+        <h3>Wrike Workspace Architecture</h3>
+        <p>Complete Wrike workspace buildout with custom workflows, space hierarchies, dashboards and automated status update triggers.</p>
+        <span class="project-result">Standardised team operations</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-3" onclick="openModal('images/wrike2.png','https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80')">
+      <div class="project-thumb">
+        <img
+          src="images/wrike2.png"
+          onerror="this.src='https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80'"
+          alt="Wrike Workflow Architecture"
+        >
+        <div class="project-thumb-overlay"></div>
+      </div>
+      <div class="project-body">
+        <div class="project-category">Wrike · Automation</div>
+        <h3>Wrike Workflow Automation</h3>
+        <p>Automated workflow rules and cross-project dependency management enabling complex multi-team campaign delivery tracking.</p>
+        <span class="project-result">Zero manual status updates</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- MODAL -->
-<div class="m-overlay" id="mOverlay" onclick="closeMOnBg(event)">
-  <div class="m-box" id="mBox">
-    <button class="m-close" onclick="closeM()">✕</button>
-    <img id="mImg" src="" alt="" class="m-img">
-    <div class="m-body">
-      <span id="mTag" class="m-tag"></span>
-      <div id="mTitle" class="m-title"></div>
-      <p id="mDesc" class="m-desc"></p>
-    </div>
-  </div>
-</div>
-
 <div class="divider"></div>
 
-<!-- ═══ STACK ═══ -->
+<!-- ─── TECH STACK ──────────────────────────────────────── -->
 <section id="stack">
-  <div class="container reveal">
-    <p class="label">Technology</p>
-    <h2 class="section-h">Technology <span class="g">Stack</span></h2>
-    <p class="section-p" style="margin-bottom:0">The tools and platforms powering scalable automation systems that generate measurable results.</p>
+  <div class="reveal" style="text-align:center; margin-bottom: 60px;">
+    <div class="section-label" style="justify-content:center; display:flex;">Technology Stack</div>
+    <h2 class="section-title" style="text-align:center; max-width:600px; margin:0 auto 14px;">Tools I Build With</h2>
+    <p class="section-sub" style="text-align:center; margin: 0 auto;">Enterprise-grade automation and CRM platforms I use to architect and deploy systems at scale.</p>
   </div>
 
-  <!-- Track 1 -->
-  <div class="scroll-track-wrap" style="margin-top:2.5rem">
-    <div class="scroll-track" id="track1"></div>
-  </div>
-  <!-- Track 2 -->
-  <div class="scroll-track-wrap">
-    <div class="scroll-track scroll-track-rev" id="track2"></div>
+  <div class="logo-carousel reveal">
+    <div class="logo-track" id="logoTrack">
+
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg" alt="HubSpot"
+             onerror="this.style.display='none'">
+        <span>HubSpot</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Microsoft"
+             onerror="this.style.display='none'">
+        <span>Microsoft</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/zapier.svg" alt="Zapier"
+             onerror="this.style.display='none'">
+        <span>Zapier</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg" alt="OpenAI"
+             onerror="this.style.display='none'">
+        <span>OpenAI</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="Jira"
+             onerror="this.style.display='none'">
+        <span>Jira</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/zoho-1.svg" alt="Zoho"
+             onerror="this.style.display='none'">
+        <span>Zoho</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Meta"
+             onerror="this.style.display='none'">
+        <span>Meta</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/canva-wordmark-2.svg" alt="Canva"
+             onerror="this.style.display='none'">
+        <span>Canva</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/idU6lzwMYA/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="n8n"
+             onerror="this.style.display='none'">
+        <span>n8n</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/idO6_6uqJ9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="ClickUp"
+             onerror="this.style.display='none'">
+        <span>ClickUp</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/idhg2vnQYV.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Wrike"
+             onerror="this.style.display='none'">
+        <span>Wrike</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/id48ThYNEO/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Dynamics 365"
+             onerror="this.style.display='none'">
+        <span>Dynamics 365</span>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg" alt="HubSpot"
+             onerror="this.style.display='none'">
+        <span>HubSpot</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Microsoft"
+             onerror="this.style.display='none'">
+        <span>Microsoft</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/zapier.svg" alt="Zapier"
+             onerror="this.style.display='none'">
+        <span>Zapier</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg" alt="OpenAI"
+             onerror="this.style.display='none'">
+        <span>OpenAI</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="Jira"
+             onerror="this.style.display='none'">
+        <span>Jira</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/zoho-1.svg" alt="Zoho"
+             onerror="this.style.display='none'">
+        <span>Zoho</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Meta"
+             onerror="this.style.display='none'">
+        <span>Meta</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.worldvectorlogo.com/logos/canva-wordmark-2.svg" alt="Canva"
+             onerror="this.style.display='none'">
+        <span>Canva</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/idU6lzwMYA/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="n8n"
+             onerror="this.style.display='none'">
+        <span>n8n</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/idO6_6uqJ9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="ClickUp"
+             onerror="this.style.display='none'">
+        <span>ClickUp</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/idhg2vnQYV.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Wrike"
+             onerror="this.style.display='none'">
+        <span>Wrike</span>
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.brandfetch.io/id48ThYNEO/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Dynamics 365"
+             onerror="this.style.display='none'">
+        <span>Dynamics 365</span>
+      </div>
+
+    </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ IMPACT ═══ -->
+<!-- ─── IMPACT ──────────────────────────────────────────── -->
 <section id="impact">
-  <div class="container">
-    <div class="reveal">
-      <p class="label">Results</p>
-      <h2 class="section-h">Business <span class="g">Impact</span></h2>
-      <p class="section-p">Quantifiable outcomes from automation systems built for high-growth marketing and sales teams.</p>
+  <div class="reveal">
+    <div class="section-label">Business Impact</div>
+    <h2 class="section-title">Results That Matter</h2>
+    <p class="section-sub">Every system I build is measured against real outcomes — less manual work, faster pipelines, and compounding efficiency gains.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card reveal reveal-delay-1">
+      <div class="metric-icon">⚡</div>
+      <div class="metric-num" data-target="25" data-suffix="+">0</div>
+      <h3>Automation Workflows Built</h3>
+      <p>CRM, marketing, and operations workflows designed and deployed across production environments.</p>
     </div>
-    <div class="impact-grid">
-
-      <div class="icard reveal">
-        <div class="icard-icon">⚙️</div>
-        <div class="icard-num" data-target="25" data-suffix="+">0</div>
-        <div class="icard-suffix" id="s0" style="display:none">+</div>
-        <div class="icard-label">CRM &amp; Marketing Automation Workflows Built</div>
-      </div>
-
-      <div class="icard reveal d1">
-        <div class="icard-icon">📉</div>
-        <div class="icard-num" data-target="30" data-suffix="%">0</div>
-        <div class="icard-suffix" id="s1" style="display:none">%</div>
-        <div class="icard-label">Reduction in Manual Lead Assignment Time</div>
-      </div>
-
-      <div class="icard reveal d2">
-        <div class="icard-icon">🌍</div>
-        <div class="icard-num" data-target="4" data-suffix="">0</div>
-        <div class="icard-suffix">Markets</div>
-        <div class="icard-label">Systems Supporting US, UK, Australia &amp; Canada</div>
-      </div>
-
+    <div class="metric-card reveal reveal-delay-2">
+      <div class="metric-icon">📉</div>
+      <div class="metric-num" data-target="30" data-suffix="%">0</div>
+      <h3>Reduction in Manual Work</h3>
+      <p>Measurable decrease in manual lead assignment time after implementing intelligent routing automation.</p>
+    </div>
+    <div class="metric-card reveal reveal-delay-3">
+      <div class="metric-icon">🌍</div>
+      <div class="metric-num" data-target="4" data-suffix=" Markets">0</div>
+      <h3>Global Markets Supported</h3>
+      <p>Systems actively running operations across US, UK, Australia, and Canadian market teams.</p>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ═══ CONTACT ═══ -->
+<!-- ─── CONTACT ─────────────────────────────────────────── -->
 <section id="contact">
-  <div class="contact-glow"></div>
-  <div class="contact-inner reveal">
-    <p class="label">Get in Touch</p>
-    <h2 class="contact-h">
-      Let's Build Smarter<br>
-      <span style="background:linear-gradient(115deg,var(--cyan) 10%,var(--purple) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
-        Automation Systems
-      </span>
-    </h2>
-    <p class="contact-p">
-      Whether you need a HubSpot overhaul, end-to-end RevOps architecture,
-      or intelligent workflow automation — let's talk about what's possible.
-    </p>
-    <div class="contact-btns">
-      <a href="mailto:hashaamtanveerk@gmail.com" class="btn btn-primary">
-        ✉&nbsp; Send Me a Message
+  <div class="contact-card reveal">
+    <h2>Let's build intelligent automation systems that scale your business.</h2>
+    <p>Whether you're scaling a CRM, untangling a broken workflow, or building revenue operations from the ground up — I'm ready to engineer it.</p>
+    <div class="contact-actions">
+      <a href="mailto:hashaamtanveerk@gmail.com" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Send a Message
       </a>
-      <a href="https://www.linkedin.com/in/hashaamtanveerhtk/" target="_blank" class="btn btn-outline">
-        LinkedIn Profile&nbsp; →
+      <a href="https://www.linkedin.com/in/hashaamtanveerhtk/" target="_blank" class="btn-outline">
+        Connect on LinkedIn →
       </a>
-    </div>
-    <div class="services">
-      <span class="svc">CRM Architecture</span>
-      <span class="svc">Marketing Automation</span>
-      <span class="svc">Workflow Engineering</span>
-      <span class="svc">RevOps Strategy</span>
-      <span class="svc">HubSpot Administration</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
 <footer>
-  <p class="footer-copy">© 2026 Hashaam Tanveer — AI &amp; Automation Systems Architect</p>
-  <ul class="footer-links">
-    <li><a href="https://www.linkedin.com/in/hashaamtanveerhtk/" target="_blank">LinkedIn</a></li>
-    <li><a href="mailto:hashaamtanveerk@gmail.com">Email</a></li>
-    <li><a href="https://hashaamtak.github.io/Hashaam_Tanveer_Resume.pdf" target="_blank">Resume</a></li>
-  </ul>
+  <div class="footer-left">Hashaam Tanveer <span>·</span> AI & Automation Systems Architect</div>
+  <div class="footer-right">© 2026 — Built with precision.</div>
 </footer>
 
+<!-- ─── MODAL ────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <img id="modal-img" src="" alt="Case study preview">
+</div>
+
+<!-- ─── JS ──────────────────────────────────────────────── -->
 <script>
-/* ── NAV ── */
-const hamburger   = document.getElementById('hamburger');
-const mobileMenu  = document.getElementById('mobileMenu');
-const nav         = document.getElementById('nav');
-
-hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-function closeMobile() { mobileMenu.classList.remove('open'); }
-
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-/* ── SCROLL REVEAL ── */
-const revObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
-
-/* ── COUNTER ── */
-const cntObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el     = e.target;
-    const target = +el.dataset.target;
-    const suffix = el.dataset.suffix || '';
-    if (!target) return;
-    let cur = 0;
-    const step = Math.max(1, Math.ceil(target / 45));
-    const t = setInterval(() => {
-      cur += step;
-      if (cur >= target) {
-        cur = target;
-        el.textContent = target + suffix;
-        clearInterval(t);
-      } else {
-        el.textContent = cur + suffix;
-      }
-    }, 38);
-    cntObs.unobserve(el);
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('[data-target]').forEach(el => cntObs.observe(el));
-
-/* ── LOGO TRACKS ── */
-const allLogos = [
-  { src: 'https://cdn.worldvectorlogo.com/logos/hubspot.svg',           name: 'HubSpot'     },
-  { src: 'https://cdn.worldvectorlogo.com/logos/zapier.svg',            name: 'Zapier'      },
-  { src: 'https://cdn.worldvectorlogo.com/logos/microsoft-5.svg',       name: 'Microsoft'   },
-  { src: 'https://cdn.worldvectorlogo.com/logos/jira-1.svg',            name: 'Jira'        },
-  { src: 'https://cdn.worldvectorlogo.com/logos/zoho-1.svg',            name: 'Zoho'        },
-  { src: 'https://cdn.worldvectorlogo.com/logos/meta-3.svg',            name: 'Meta'        },
-  { src: 'https://cdn.worldvectorlogo.com/logos/openai-2.svg',          name: 'OpenAI'      },
-  { src: 'https://cdn.worldvectorlogo.com/logos/canva-wordmark-2.svg',  name: 'Canva'       },
-  { src: 'https://cdn.brandfetch.io/idU6lzwMYA/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B', name: 'n8n' },
-  { src: 'https://cdn.brandfetch.io/idO6_6uqJ9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B', name: 'Wrike' },
-  { src: 'https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/idhg2vnQYV.svg?c=1dxbfHSJFAPEGdCLU4o5B', name: 'Platform' },
-  { src: 'https://cdn.brandfetch.io/idYpJMnlBx/w/192/h/192/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B', name: 'Tool' },
-  { src: 'https://cdn.brandfetch.io/id48ThYNEO/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B', name: 'Tool' },
-  { src: 'https://cdn.brandfetch.io/id9Up4qFxi/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B',  name: 'Tool' },
-];
-
-function buildTrack(trackId, logos) {
-  const track = document.getElementById(trackId);
-  const set   = [...logos, ...logos]; // duplicate for seamless loop
-  set.forEach(logo => {
-    const pill = document.createElement('div');
-    pill.className = 'logo-pill';
-    const img = document.createElement('img');
-    img.src = logo.src; img.alt = logo.name; img.loading = 'lazy';
-    const span = document.createElement('span');
-    span.textContent = logo.name;
-    pill.appendChild(img); pill.appendChild(span);
-    track.appendChild(pill);
-  });
-}
-buildTrack('track1', allLogos.slice(0, 8));
-buildTrack('track2', allLogos.slice(5));
-
-/* ── MODAL DATA ── */
-const projects = [
-  {
-    tag: 'Analytics',
-    title: 'HubSpot Analytics Dashboard',
-    desc: 'Built a comprehensive multi-pipeline analytics dashboard inside HubSpot tracking MQL-to-SQL conversion rates, revenue attribution across channels, and real-time campaign ROI. Enabled sales and marketing leadership to make data-driven decisions without relying on manual spreadsheet reporting. Integrated with sales pipeline views to provide end-to-end funnel visibility for the entire go-to-market team.',
-    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80'
-  },
-  {
-    tag: 'Automation',
-    title: 'Lead Routing Automation',
-    desc: 'Designed intelligent HubSpot workflows automatically routing 500+ monthly leads by territory, product interest, company size, and rep capacity. This system reduced manual lead assignment time by 30% and ensured no lead waited more than 2 hours without follow-up. Included SLA enforcement alerts and escalation paths for unworked leads.',
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&q=80'
-  },
-  {
-    tag: 'Lifecycle',
-    title: 'Webinar Lifecycle Workflow',
-    desc: 'Built end-to-end webinar automation covering pre-registration confirmations, multi-touch reminder sequences, live attendance tracking, and post-event nurture campaigns. Automated attendee segmentation based on engagement scores triggered direct sales follow-up for high-intent participants, dramatically increasing post-webinar pipeline conversion.',
-    img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1000&q=80'
-  },
-  {
-    tag: 'Campaigns',
-    title: 'Education Campaign System',
-    desc: 'Architected a multi-channel education campaign system with behavioral triggers, A/B testing infrastructure, and automated enrollment journeys tailored for four global markets: US, UK, Australia, and Canada. Built contact segmentation logic that improved email open rates by over 25% and reduced unsubscribe rates through hyper-relevant targeting.',
-    img: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1000&q=80'
-  },
-  {
-    tag: 'Project Management',
-    title: 'Wrike Workspace Setup',
-    desc: 'Architected a full marketing operations workspace in Wrike with custom workflows, intake request forms, multi-stage approval chains, and cross-functional visibility dashboards. Reduced average project delivery time and eliminated recurring status update meetings through automated progress tracking and stakeholder notifications.',
-    img: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1000&q=80'
-  },
-  {
-    tag: 'Architecture',
-    title: 'Wrike Workflow Architecture',
-    desc: 'Designed and implemented scalable Wrike workflow architecture supporting 20+ concurrent marketing campaigns simultaneously. Built automated status update triggers, executive stakeholder reporting dashboards, and resource allocation views that gave marketing leadership full operational visibility without requiring manual check-ins or status calls.',
-    img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1000&q=80'
-  }
-];
-
-function openM(i) {
-  const p = projects[i];
-  document.getElementById('mImg').src     = p.img;
-  document.getElementById('mTag').textContent   = p.tag;
-  document.getElementById('mTitle').textContent = p.title;
-  document.getElementById('mDesc').textContent  = p.desc;
-  document.getElementById('mOverlay').classList.add('open');
+/* Modal */
+function openModal(primary, fallback) {
+  const modal = document.getElementById('modal');
+  const img   = document.getElementById('modal-img');
+  img.src = primary;
+  img.onerror = () => { img.src = fallback; };
+  modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-function closeM() {
-  document.getElementById('mOverlay').classList.remove('open');
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
 }
-function closeMOnBg(e) {
-  if (e.target === document.getElementById('mOverlay')) closeM();
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Scroll reveal */
+function handleReveal() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 80) el.classList.add('active');
+  });
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(); });
+window.addEventListener('scroll', handleReveal, { passive: true });
+handleReveal();
+
+/* Counter animation */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const step = target / (duration / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + suffix;
+    if (current >= target) clearInterval(timer);
+  }, 16);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = 'true';
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+/* Navbar active state */
+const sections = document.querySelectorAll('section[id]');
+const navLinks  = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current
+      ? 'var(--accent)' : '';
+  });
+}, { passive: true });
 </script>
+
 </body>
 </html>
