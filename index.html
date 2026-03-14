@@ -93,53 +93,121 @@ body::after {
 /* NAV */
 nav {
   position: fixed; top: 0; width: 100%;
-  padding: 16px 6%;
+  padding: 0 6%;
+  height: 62px;
   display: flex; justify-content: space-between; align-items: center;
-  background: rgba(6, 13, 26, 0.72);
-  backdrop-filter: blur(22px) saturate(140%);
-  border-bottom: 1px solid rgba(79,143,255,0.07);
+  background: transparent;
   z-index: 1000;
-  transition: background 0.35s, border-color 0.35s;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  animation: navDrop 0.6s 0.1s both;
 }
-nav.scrolled { background: rgba(6,13,26,0.93); border-color: rgba(79,143,255,0.12); }
-
-.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+@keyframes navDrop { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:none} }
+nav.scrolled {
+  background: rgba(6,10,22,0.88);
+  backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(79,143,255,0.10);
+}
+.nav-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
 .nav-mono {
-  width: 32px; height: 32px;
-  background: var(--accent);
-  border-radius: 8px;
+  position: relative;
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Fraunces', serif;
-  font-weight: 600; font-size: 15px; color: #fff;
+  font-weight: 700; font-size: 16px; color: #fff;
+  box-shadow: 0 4px 16px rgba(79,143,255,0.35);
+  overflow: hidden;
 }
-.nav-nm { font-weight: 600; font-size: 14px; color: var(--white); }
-
-.nav-links { display: flex; align-items: center; gap: 2px; }
-.nav-links a {
+.nav-mono::after {
+  content: '';
+  position: absolute; top: -40%; left: -30%;
+  width: 40%; height: 180%;
+  background: rgba(255,255,255,0.25);
+  transform: skewX(-20deg) translateX(-100%);
+  animation: shimmer 3.5s ease-in-out infinite;
+}
+@keyframes shimmer { 0%,70%{transform:skewX(-20deg) translateX(-100%)} 85%{transform:skewX(-20deg) translateX(350%)} 100%{transform:skewX(-20deg) translateX(350%)} }
+.nav-nm { font-weight: 700; font-size: 14px; color: var(--white); letter-spacing: -0.3px; }
+.nav-pill {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center;
+  background: rgba(10,18,40,0.7);
+  border: 1px solid rgba(79,143,255,0.13);
+  border-radius: 100px;
+  padding: 4px;
+  backdrop-filter: blur(16px);
+  gap: 2px;
+}
+.nav-pill a {
   color: var(--text2); text-decoration: none;
-  padding: 7px 13px; border-radius: 8px;
-  font-size: 13.5px; font-weight: 500;
-  transition: all 0.2s;
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 13px; font-weight: 500;
+  transition: all 0.22s; white-space: nowrap;
 }
-.nav-links a:hover { color: var(--white); background: rgba(79,143,255,0.07); }
-.nb { background: var(--accent) !important; color: #fff !important; font-weight: 600 !important; box-shadow: 0 2px 12px rgba(79,143,255,0.3); }
-.nb:hover { background: var(--accent2) !important; transform: translateY(-1px); }
-
+.nav-pill a:hover { color: var(--white); background: rgba(79,143,255,0.10); }
+.nb {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent); color: #fff !important;
+  font-weight: 600 !important; font-size: 13px;
+  padding: 8px 18px; border-radius: 100px; text-decoration: none;
+  box-shadow: 0 2px 16px rgba(79,143,255,0.32); transition: all 0.22s;
+}
+.nb:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 22px rgba(79,143,255,0.42); }
+.nav-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
+.ns-dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: blink 2s infinite; }
 .hbg { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
 .hbg span { width: 20px; height: 1.5px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+.nav-links { display: none; }
 
 /* HERO */
 .hero {
   min-height: 100vh;
   display: flex; align-items: center;
   padding: 110px 6% 70px;
+  position: relative; overflow: hidden;
 }
+
+/* Beam ray */
+.hero-beam {
+  position: absolute;
+  top: -60px; left: 38%;
+  width: 1px; height: 70vh;
+  background: linear-gradient(to bottom, transparent, rgba(79,143,255,0.18), transparent);
+  transform: rotate(15deg);
+  pointer-events: none;
+  animation: beamPulse 5s ease-in-out infinite;
+}
+.hero-beam2 {
+  position: absolute;
+  top: -40px; left: 62%;
+  width: 1px; height: 50vh;
+  background: linear-gradient(to bottom, transparent, rgba(79,143,255,0.10), transparent);
+  transform: rotate(-10deg);
+  pointer-events: none;
+  animation: beamPulse 7s ease-in-out infinite reverse;
+}
+@keyframes beamPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* Floating orb under profile card */
+.hero-orb {
+  position: absolute; right: 4%; top: 30%;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(79,143,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+@keyframes orbFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-22px)} }
+
 .hero-in {
   max-width: 1160px; width: 100%; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 320px;
   gap: 64px; align-items: center;
+  position: relative; z-index: 1;
 }
 
+/* Badge */
 .h-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(79,143,255,0.08);
@@ -151,33 +219,63 @@ nav.scrolled { background: rgba(6,13,26,0.93); border-color: rgba(79,143,255,0.1
 .bdot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: blink 2.2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
+/* Animated heading — each word slides in */
 .h-h1 {
   font-family: 'Fraunces', serif;
   font-size: clamp(34px, 4.4vw, 58px);
   font-weight: 300; font-style: italic;
   color: var(--white); line-height: 1.12; letter-spacing: -1.5px;
-  animation: fu 0.7s 0.12s both;
 }
 .h-h1 strong { font-weight: 600; font-style: normal; display: block; }
 .hl {
   color: transparent;
   background: linear-gradient(100deg, var(--accent) 0%, var(--accent3) 100%);
   -webkit-background-clip: text; background-clip: text;
+  background-size: 200% auto;
+  animation: gradShift 4s ease-in-out infinite;
 }
+@keyframes gradShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
 
+.word { display: inline-block; overflow: hidden; }
+.word-inner { display: inline-block; animation: wordUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.w1 .word-inner { animation-delay: 0.08s; }
+.w2 .word-inner { animation-delay: 0.18s; }
+.w3 .word-inner { animation-delay: 0.28s; }
+.w4 .word-inner { animation-delay: 0.38s; }
+@keyframes wordUp { from{transform:translateY(110%);opacity:0} to{transform:translateY(0);opacity:1} }
+
+/* Typewriter role line */
 .h-role {
   margin-top: 14px; font-size: 13px; font-weight: 500;
   color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase;
-  animation: fu 0.7s 0.2s both;
+  display: flex; align-items: center; gap: 8px;
+  animation: fu 0.7s 0.5s both;
 }
+.role-static { color: var(--text3); }
+.role-typed { color: var(--accent3); border-right: 2px solid var(--accent); padding-right: 3px; animation: cursor 0.75s step-end infinite; }
+@keyframes cursor { 0%,100%{border-color:var(--accent)} 50%{border-color:transparent} }
 
 .h-desc {
   margin-top: 17px; font-size: 14.5px; color: var(--text2);
   max-width: 510px; line-height: 1.82;
-  animation: fu 0.7s 0.28s both;
+  animation: fu 0.7s 0.55s both;
 }
 
-.h-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 21px; animation: fu 0.7s 0.35s both; }
+/* Stat row under desc */
+.h-stats {
+  display: flex; gap: 28px; margin-top: 22px;
+  animation: fu 0.7s 0.62s both;
+}
+.hstat { text-align: left; }
+.hstat-n {
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 600; color: var(--accent3);
+  line-height: 1; letter-spacing: -0.8px;
+}
+.hstat-l { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.hstat-div { width: 1px; background: var(--bdr); align-self: stretch; }
+
+.h-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; animation: fu 0.7s 0.68s both; }
 .pill {
   font-size: 12px; font-weight: 500; color: var(--text3);
   border: 1px solid var(--bdr); padding: 4px 11px; border-radius: 100px;
@@ -185,7 +283,7 @@ nav.scrolled { background: rgba(6,13,26,0.93); border-color: rgba(79,143,255,0.1
 }
 .pill:hover { color: var(--accent); border-color: rgba(79,143,255,0.3); }
 
-.h-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; animation: fu 0.7s 0.42s both; }
+.h-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; animation: fu 0.7s 0.74s both; }
 
 .btn-a {
   display: inline-flex; align-items: center; gap: 7px;
@@ -207,8 +305,10 @@ nav.scrolled { background: rgba(6,13,26,0.93); border-color: rgba(79,143,255,0.1
 }
 .btn-b:hover { border-color: var(--bdr-h); color: var(--white); background: var(--accent-dim); transform: translateY(-2px); }
 
-.scroll-hint { display: flex; align-items: center; gap: 9px; margin-top: 38px; color: var(--text3); font-size: 12px; animation: fu 0.7s 0.6s both; }
+.scroll-hint { display: flex; align-items: center; gap: 9px; margin-top: 38px; color: var(--text3); font-size: 12px; animation: fu 0.7s 0.9s both; }
 .sline { width: 28px; height: 1px; background: var(--text3); }
+.scroll-arrow { animation: bounceY 1.6s ease-in-out infinite; }
+@keyframes bounceY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 
 /* Profile card */
 .pcard {
@@ -219,12 +319,21 @@ nav.scrolled { background: rgba(6,13,26,0.93); border-color: rgba(79,143,255,0.1
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow);
   position: relative; overflow: hidden;
-  animation: fu 0.7s 0.2s both;
+  animation: fu 0.7s 0.3s both, cardFloat 7s ease-in-out 1s infinite;
 }
+@keyframes cardFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 .pcard::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(79,143,255,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(79,143,255,0.5), transparent);
 }
+.pcard::after {
+  content: ''; position: absolute; inset: 0; border-radius: var(--r-lg);
+  background: conic-gradient(from 0deg, transparent 0%, rgba(79,143,255,0.06) 30%, transparent 60%);
+  animation: cardSpin 8s linear infinite;
+  pointer-events: none; z-index: 0;
+}
+@keyframes cardSpin { to { transform: rotate(360deg); } }
+.pcard > * { position: relative; z-index: 1; }
 
 .pphoto {
   width: 68px; height: 68px;
@@ -324,13 +433,14 @@ section { padding: 84px 6%; }
 .stiles { display: grid; grid-template-columns: repeat(6,1fr); gap: 11px; margin-top: 42px; }
 .stile {
   background: var(--surface); border: 1px solid var(--bdr); border-radius: var(--r);
-  padding: 17px 10px 13px;
-  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding: 20px 10px;
+  display: flex; flex-direction: column; align-items: center;
   transition: all 0.25s;
+  aspect-ratio: 1;
+  justify-content: center;
 }
-.stile:hover { border-color: var(--bdr-h); background: rgba(79,143,255,0.05); transform: translateY(-3px); box-shadow: var(--glow-sm); }
-.stile img { width: 34px; height: 34px; object-fit: contain; }
-.stile span { font-size: 11px; font-weight: 500; color: var(--text2); text-align: center; line-height: 1.3; }
+.stile:hover { border-color: var(--bdr-h); background: rgba(79,143,255,0.05); transform: translateY(-4px) scale(1.04); box-shadow: var(--glow-sm); }
+.stile img { width: 40px; height: 40px; object-fit: contain; }
 
 .band-wrap { margin-top: 42px; overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
 .band { display: flex; gap: 44px; align-items: center; animation: marquee 30s linear infinite; width: max-content; }
@@ -427,22 +537,28 @@ footer {
   .wgrid { grid-template-columns: repeat(2,1fr); }
   .stiles { grid-template-columns: repeat(4,1fr); }
   .mrow { grid-template-columns: repeat(2,1fr); }
+  .nav-pill { display: none; }
 }
 @media (max-width:860px) {
   .hero-in { grid-template-columns: 1fr; gap: 36px; }
   .pcard { max-width: 320px; margin: 0 auto; }
   .about-g { grid-template-columns: 1fr; gap: 36px; }
   section { padding: 66px 5%; }
+  .hero-beam, .hero-beam2, .hero-orb { display: none; }
+  .h-stats { gap: 18px; }
 }
 @media (max-width:640px) {
-  nav { padding: 14px 5%; }
-  .nav-links { display: none; }
-  .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 55px; left: 0; right: 0; background: rgba(6,13,26,0.97); backdrop-filter: blur(20px); padding: 14px; border-bottom: 1px solid var(--bdr); gap: 4px; }
+  nav { padding: 0 5%; }
+  .nav-pill { display: none; }
   .hbg { display: flex; }
+  .nav-mobile-menu { display: flex; flex-direction: column; position: fixed; top: 62px; left: 0; right: 0; background: rgba(6,13,26,0.97); backdrop-filter: blur(20px); padding: 14px; border-bottom: 1px solid var(--bdr); gap: 4px; z-index: 999; }
+  .nav-mobile-menu a { color: var(--text2); text-decoration: none; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+  .nav-mobile-menu a:hover { color: var(--white); background: rgba(79,143,255,0.07); }
   .wgrid { grid-template-columns: 1fr; }
-  .stiles { grid-template-columns: repeat(3,1fr); }
+  .stiles { grid-template-columns: repeat(4,1fr); }
   .mrow { grid-template-columns: repeat(2,1fr); }
   footer { flex-direction: column; text-align: center; }
+  .h-stats { flex-wrap: wrap; }
 }
 </style>
 </head>
@@ -459,37 +575,86 @@ footer {
 <nav id="nav">
   <a href="#" class="nav-brand">
     <div class="nav-mono">H</div>
-    <span class="nav-nm">Hashaam Tanveer</span>
+    <div>
+      <div class="nav-nm">Hashaam Tanveer</div>
+    </div>
   </a>
-  <div class="nav-links" id="navLinks">
+
+  <!-- Centered pill nav -->
+  <div class="nav-pill" id="navPill">
     <a href="#work">Work</a>
     <a href="#stack">Stack</a>
     <a href="#about">About</a>
     <a href="#impact">Impact</a>
-    <a href="#contact" class="nb">Hire Me</a>
   </div>
-  <div class="hbg" id="hbg" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div class="nav-status">
+      <span class="ns-dot"></span>
+      <span style="display:none;" class="ns-text">Available</span>
+    </div>
+    <a href="#contact" class="nb">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Hire Me
+    </a>
+    <div class="hbg" id="hbg" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
 
+<!-- Mobile nav -->
+<div class="nav-mobile-menu" id="mobileMenu" style="display:none;">
+  <a href="#work" onclick="toggleMenu()">Work</a>
+  <a href="#stack" onclick="toggleMenu()">Stack</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#impact" onclick="toggleMenu()">Impact</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--accent);">Hire Me</a>
+</div>
+
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-beam"></div>
+  <div class="hero-beam2"></div>
+  <div class="hero-orb"></div>
+
   <div class="hero-in">
 
     <div>
       <div class="h-badge"><span class="bdot"></span> Open to freelance &amp; full-time roles</div>
 
       <h1 class="h-h1">
-        <em>Automation</em>
-        <strong>Systems <span class="hl">Architect</span></strong>
+        <span class="word w1"><span class="word-inner"><em>Automation</em></span></span>
+        <strong>
+          <span class="word w2"><span class="word-inner">Systems</span></span>&nbsp;<span class="word w3"><span class="word-inner"><span class="hl">Architect</span></span></span>
+        </strong>
       </h1>
 
-      <p class="h-role">HubSpot · n8n · Zapier · ClickUp · Wrike · Jira</p>
+      <p class="h-role">
+        <span class="role-static">Specialising in&nbsp;</span>
+        <span class="role-typed" id="roleTyped"></span>
+      </p>
 
       <p class="h-desc">
         I design CRM systems, marketing automation stacks, and workflow infrastructure that remove manual friction — giving revenue teams the clarity and speed to operate at scale.
       </p>
+
+      <div class="h-stats">
+        <div class="hstat">
+          <div class="hstat-n">25+</div>
+          <div class="hstat-l">Workflows Built</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n">30%</div>
+          <div class="hstat-l">Ops Time Saved</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n">4</div>
+          <div class="hstat-l">Global Markets</div>
+        </div>
+      </div>
 
       <div class="h-pills">
         <span class="pill">CRM Architecture</span>
@@ -516,7 +681,9 @@ footer {
       </div>
 
       <div class="scroll-hint">
-        <span class="sline"></span> Scroll to explore
+        <span class="sline"></span>
+        <span class="scroll-arrow">↓</span>
+        Scroll to explore
       </div>
     </div>
 
@@ -651,18 +818,18 @@ footer {
     <p class="ssub r d2">Specialised in automation platforms, CRM ecosystems, and the integrations that connect them into a single operating layer.</p>
 
     <div class="stiles r d2">
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg" alt="HubSpot"><span>HubSpot</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/zapier.svg" alt="Zapier"><span>Zapier</span></div>
-      <div class="stile"><img src="https://cdn.brandfetch.io/idU6lzwMYA/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="n8n"><span>n8n</span></div>
-      <div class="stile"><img src="https://cdn.brandfetch.io/idO6_6uqJ9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="ClickUp"><span>ClickUp</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="Jira"><span>Jira</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Microsoft"><span>Microsoft 365</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg" alt="OpenAI"><span>OpenAI</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/zoho-1.svg" alt="Zoho"><span>Zoho CRM</span></div>
-      <div class="stile"><img src="https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/idhg2vnQYV.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Slack"><span>Slack</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Meta Ads"><span>Meta Ads</span></div>
-      <div class="stile"><img src="https://cdn.brandfetch.io/idYpJMnlBx/w/192/h/192/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" alt="Google"><span>Google</span></div>
-      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/canva-wordmark-2.svg" alt="Canva"><span>Canva</span></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg" alt="HubSpot"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/zapier.svg" alt="Zapier"></div>
+      <div class="stile"><img src="https://cdn.brandfetch.io/idU6lzwMYA/theme/light/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="n8n"></div>
+      <div class="stile"><img src="https://cdn.brandfetch.io/idO6_6uqJ9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="ClickUp"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="Jira"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-5.svg" alt="Microsoft"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/openai-2.svg" alt="OpenAI"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/zoho-1.svg" alt="Zoho"></div>
+      <div class="stile"><img src="https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/idhg2vnQYV.svg?c=1dxbfHSJFAPEGdCLU4o5B" alt="Slack"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/meta-3.svg" alt="Meta Ads"></div>
+      <div class="stile"><img src="https://cdn.brandfetch.io/idYpJMnlBx/w/192/h/192/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" alt="Google"></div>
+      <div class="stile"><img src="https://cdn.worldvectorlogo.com/logos/canva-wordmark-2.svg" alt="Canva"></div>
     </div>
 
     <div class="band-wrap r d3">
@@ -774,11 +941,11 @@ footer {
         Messy CRM? Broken handoffs between tools? Reporting that takes hours every week? I've fixed all of these — and I'm straightforward to work with. Drop me an email or connect on LinkedIn and we can talk through what you're dealing with.
       </p>
       <div class="crow r d3">
-        <a href="mailto:hashaamtanveerk@gmail.com" class="clink p">
+        <a href="/cdn-cgi/l/email-protection#274f46544f46464a534649514242554c67404a464e4b0944484a" class="clink p">
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
           Send an Email
         </a>
-        <a href="https://www.linkedin.com/in/hashaamtanveerhtk/" target="_blank" class="clink">
+        <a href="https://linkedin.com/in/hashaamtanveerhtk/" target="_blank" class="clink">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           Connect on LinkedIn
         </a>
@@ -800,7 +967,7 @@ footer {
     <a href="#stack">Stack</a>
     <a href="#about">About</a>
     <a href="mailto:hashaamtanveerk@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/hashaamtanveerhtk/" target="_blank">LinkedIn</a>
+    <a href="https://linkedin.com/in/hashaamtanveerhtk/" target="_blank">LinkedIn</a>
   </nav>
 </footer>
 
@@ -815,10 +982,79 @@ footer {
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), { passive: true });
 
-/* Mobile nav */
+/* Active nav pill */
+const pillLinks = document.querySelectorAll('.nav-pill a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  document.querySelectorAll('section[id]').forEach(s => { if (scrollY >= s.offsetTop - 130) current = s.id; });
+  pillLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}, { passive: true });
+
+/* Mobile menu */
 function toggleMenu() {
-  document.getElementById('navLinks').classList.toggle('open');
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'none' ? 'flex' : 'none';
 }
+
+/* Typewriter */
+const words = ['HubSpot workflows', 'n8n automations', 'Zapier integrations', 'CRM architecture', 'ClickUp systems', 'Wrike workspaces', 'Jira setups', 'RevOps infrastructure'];
+let wi = 0, ci = 0, deleting = false;
+const tyEl = document.getElementById('roleTyped');
+function type() {
+  if (!tyEl) return;
+  const word = words[wi];
+  if (!deleting) {
+    tyEl.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+    setTimeout(type, 68);
+  } else {
+    tyEl.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(type, 300); return; }
+    setTimeout(type, 38);
+  }
+}
+setTimeout(type, 900);
+
+/* Modal */
+function openModal(src) {
+  document.getElementById('mImg').src = src;
+  document.getElementById('modal').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if (!e || e.target.id === 'modal' || e.target.classList.contains('mx')) {
+    document.getElementById('modal').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Scroll reveal */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); observer.unobserve(en.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.r').forEach(el => observer.observe(el));
+
+/* Counter animation */
+function countUp(el) {
+  const target = +el.dataset.target;
+  const sup = el.querySelector('sup')?.outerHTML || '';
+  const dur = 1500; let start = null;
+  const step = (ts) => {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / dur, 1);
+    el.innerHTML = Math.round((1 - Math.pow(1 - p, 3)) * target) + sup;
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const cObs = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting && en.target.dataset.target) { countUp(en.target); cObs.unobserve(en.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('.mc-n[data-target]').forEach(el => cObs.observe(el));
+</script>
+</body>
+</html>
 
 /* Modal */
 function openModal(src) {
@@ -859,12 +1095,4 @@ function countUp(el) {
 }
 const cObs = new IntersectionObserver((entries) => {
   entries.forEach(en => {
-    if (en.isIntersecting && en.target.dataset.target) {
-      countUp(en.target); cObs.unobserve(en.target);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.mc-n[data-target]').forEach(el => cObs.observe(el));
-</script>
-</body>
-</html>
+    if (en.isIntersecting && en.target.dataset.ta
