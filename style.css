@@ -1,24 +1,27 @@
-:root {
-  --bg: #05070d;
-  --accent: #4f7cff;
-}
-
 body {
   margin:0;
-  background: var(--bg);
+  background:#05070d;
   color:white;
-  font-family: 'Inter', sans-serif;
+  font-family:sans-serif;
   overflow-x:hidden;
 }
 
-/* NOISE BACKGROUND */
-.noise {
+/* THREE BACKGROUND */
+#bg {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* TRANSITION */
+.transition {
   position:fixed;
   width:100%;
   height:100%;
-  background:url('https://grainy-gradients.vercel.app/noise.svg');
-  opacity:0.05;
-  pointer-events:none;
+  background:#000;
+  z-index:2000;
+  transform:translateY(100%);
 }
 
 /* CURSOR */
@@ -29,18 +32,16 @@ body {
   border-radius:50%;
   position:fixed;
   pointer-events:none;
-  transition: transform 0.1s;
   z-index:9999;
 }
 
-/* NAV */
-.navbar {
+/* NOISE */
+.noise {
   position:fixed;
   width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:20px 40px;
-  backdrop-filter: blur(20px);
+  height:100%;
+  background:url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity:0.04;
 }
 
 /* HERO */
@@ -50,24 +51,23 @@ body {
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
 }
 
 .hero h1 {
-  font-size:80px;
+  font-size:90px;
 }
 
 .hero span {
-  background: linear-gradient(90deg,#4f7cff,#7aaeff);
+  background:linear-gradient(90deg,#4f7cff,#7aaeff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-/* GRID */
+/* CARDS */
 .grid {
   display:flex;
-  padding:80px;
   gap:20px;
+  padding:100px;
 }
 
 .card {
@@ -80,25 +80,5 @@ body {
 
 .card:hover {
   transform:translateY(-10px) scale(1.05);
-  box-shadow:0 0 60px #4f7cff33;
-}
-
-/* BUTTON */
-.cta {
-  padding:15px 40px;
-  border:none;
-  background:var(--accent);
-  color:white;
-  margin-top:20px;
-  cursor:pointer;
-  border-radius:30px;
-}
-
-/* LOADER */
-.loader {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  z-index:2000;
+  box-shadow:0 0 80px #4f7cff44;
 }
