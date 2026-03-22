@@ -3,304 +3,249 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="HT. Systems Tech Stack — The tools, languages, and platforms we use to build intelligent systems.">
-  <title>Tech Stack — HT. Systems</title>
+  <title>Tech Stack — AI Systems</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⚡</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <div id="scroll-progress" aria-hidden="true"></div>
-
-  <div class="loader-overlay" role="status" aria-label="Loading">
+  <div class="loader">
     <div class="loader-logo">HT.</div>
-    <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+    <div class="loader-bar-track"><div class="loader-bar"></div></div>
   </div>
+  <div class="page-transition"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+  <canvas id="webgl-bg"></canvas>
 
   <!-- Nav -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo">HT.</a>
-      <div class="nav__links">
-        <a href="index.html" class="nav__link">Home</a>
-        <a href="stack.html" class="nav__link">Stack</a>
-        <a href="systems.html" class="nav__link">Systems</a>
-        <a href="diagrams.html" class="nav__link">Architecture</a>
-        <a href="mailto:hashaamtanveer@outlook.com" class="nav__cta" data-magnetic>Start Project</a>
-      </div>
-      <button class="nav__burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo page-link"><span>HT.</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link page-link">Home</a>
+      <a href="stack.html" class="nav-link active">Stack</a>
+      <a href="systems.html" class="nav-link page-link">Systems</a>
+      <a href="diagrams.html" class="nav-link page-link">Diagrams</a>
+      <div class="magnetic"><a href="index.html#contact" class="nav-cta page-link">Start Project</a></div>
     </div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
   </nav>
 
-  <!-- ==================== HERO ==================== -->
-  <section class="hero" style="min-height: 60vh;">
-    <div class="hero__bg" aria-hidden="true">
-      <div class="hero__grid"></div>
-      <div class="hero__orb hero__orb--1" style="opacity:0.2;"></div>
-      <div class="hero__orb hero__orb--2" style="opacity:0.15;"></div>
-    </div>
-    <div class="container">
-      <div class="hero__content">
-        <div class="hero__badge reveal">
-          <span class="hero__badge-dot"></span>
-          Engineering Toolkit
-        </div>
-        <h1 class="hero__title reveal" style="transition-delay:0.1s">
-          Our <span class="text-gradient">Tech Stack</span>
-        </h1>
-        <p class="hero__subtitle reveal" style="transition-delay:0.2s">
-          A curated arsenal of modern technologies — chosen not because they're trendy, but because they deliver results at scale.
-        </p>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container" style="text-align:center;">
+      <div class="hero-badge" style="opacity:1;transform:none;margin:0 auto 32px;">
+        <span class="dot"></span>
+        Technology
       </div>
+      <h1 class="section-title" style="font-size:clamp(40px,6vw,72px);">
+        Our <span class="gradient-text">Tech Stack</span>
+      </h1>
+      <p class="section-desc" style="margin:0 auto;max-width:600px;">
+        Production-grade tools and frameworks powering intelligent systems at scale.
+      </p>
     </div>
   </section>
 
-  <!-- ==================== LANGUAGES & CORE ==================== -->
-  <section class="section" id="languages">
+  <!-- Stack Categories -->
+  <section class="section" style="padding-top:0;">
     <div class="container">
-      <div class="section__header reveal">
-        <span class="section__label">Core Languages</span>
-        <h2 class="section__title">The <span class="text-gradient">Foundation</span></h2>
-        <p class="section__desc">Languages we think in, dream in, and ship with.</p>
+
+      <!-- AI & ML -->
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">🧠 AI & Machine Learning</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="icon">🐍</div>
+            <div class="label">Python</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🦜</div>
+            <div class="label">LangChain</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🤖</div>
+            <div class="label">OpenAI</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔥</div>
+            <div class="label">PyTorch</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🤗</div>
+            <div class="label">Hugging Face</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">📐</div>
+            <div class="label">Scikit-learn</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔗</div>
+            <div class="label">LlamaIndex</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">⚙️</div>
+            <div class="label">CrewAI</div>
+          </div>
+        </div>
       </div>
 
-      <div class="grid-4 stagger-children">
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🐍</div>
-          <div class="tech-orb__name">Python</div>
-          <div class="tech-orb__category">AI / Backend</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">📜</div>
-          <div class="tech-orb__name">TypeScript</div>
-          <div class="tech-orb__category">Full-Stack</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">☕</div>
-          <div class="tech-orb__name">JavaScript</div>
-          <div class="tech-orb__category">Frontend / Node</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🗄️</div>
-          <div class="tech-orb__name">SQL</div>
-          <div class="tech-orb__category">Data</div>
+      <!-- Backend -->
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">🔧 Backend & APIs</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="icon">⚡</div>
+            <div class="label">FastAPI</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🟢</div>
+            <div class="label">Node.js</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🌐</div>
+            <div class="label">Express</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔷</div>
+            <div class="label">TypeScript</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🐘</div>
+            <div class="label">PostgreSQL</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔴</div>
+            <div class="label">Redis</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🍃</div>
+            <div class="label">MongoDB</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔺</div>
+            <div class="label">Pinecone</div>
+          </div>
         </div>
       </div>
+
+      <!-- Frontend -->
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">🎨 Frontend & UI</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="icon">⚛️</div>
+            <div class="label">React</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">▲</div>
+            <div class="label">Next.js</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">💨</div>
+            <div class="label">Tailwind CSS</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🎭</div>
+            <div class="label">Three.js</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🎬</div>
+            <div class="label">GSAP</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">📱</div>
+            <div class="label">React Native</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">☁️ Infrastructure & DevOps</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="icon">🐳</div>
+            <div class="label">Docker</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">☸️</div>
+            <div class="label">Kubernetes</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🌩️</div>
+            <div class="label">AWS</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">▲</div>
+            <div class="label">Vercel</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🔄</div>
+            <div class="label">GitHub Actions</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">📊</div>
+            <div class="label">Grafana</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🐰</div>
+            <div class="label">RabbitMQ</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">📝</div>
+            <div class="label">Terraform</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="stack-category reveal">
+        <h3 class="stack-category-title">🛠️ Tools & Workflow</h3>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="icon">🐙</div>
+            <div class="label">Git</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">📋</div>
+            <div class="label">Notion</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🎯</div>
+            <div class="label">Linear</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">📬</div>
+            <div class="label">Postman</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">🖌️</div>
+            <div class="label">Figma</div>
+          </div>
+          <div class="stack-item">
+            <div class="icon">💻</div>
+            <div class="label">VS Code</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ==================== AI / ML ==================== -->
-  <section class="section" id="ai-ml">
+  <!-- CTA -->
+  <section class="cta-section">
     <div class="container">
-      <div class="section__header reveal">
-        <span class="section__label">AI & Machine Learning</span>
-        <h2 class="section__title"><span class="text-gradient">Intelligence</span> Layer</h2>
-        <p class="section__desc">The models, frameworks, and platforms powering our AI solutions.</p>
-      </div>
-
-      <div class="grid-4 stagger-children">
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🧠</div>
-          <div class="tech-orb__name">OpenAI / GPT</div>
-          <div class="tech-orb__category">LLMs</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🔬</div>
-          <div class="tech-orb__name">LangChain</div>
-          <div class="tech-orb__category">Agent Framework</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🔥</div>
-          <div class="tech-orb__name">PyTorch</div>
-          <div class="tech-orb__category">Deep Learning</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">📊</div>
-          <div class="tech-orb__name">Scikit-Learn</div>
-          <div class="tech-orb__category">Classical ML</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🤗</div>
-          <div class="tech-orb__name">HuggingFace</div>
-          <div class="tech-orb__category">Models / NLP</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">📐</div>
-          <div class="tech-orb__name">Pinecone</div>
-          <div class="tech-orb__category">Vector DB</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🔗</div>
-          <div class="tech-orb__name">CrewAI</div>
-          <div class="tech-orb__category">Multi-Agent</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">⚙️</div>
-          <div class="tech-orb__name">n8n / Make</div>
-          <div class="tech-orb__category">Automation</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== BACKEND / INFRA ==================== -->
-  <section class="section" id="backend">
-    <div class="container">
-      <div class="section__header reveal">
-        <span class="section__label">Backend & Infrastructure</span>
-        <h2 class="section__title">The <span class="text-gradient">Engine</span> Room</h2>
-      </div>
-
-      <div class="grid-4 stagger-children">
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">⚡</div>
-          <div class="tech-orb__name">FastAPI</div>
-          <div class="tech-orb__category">Python API</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🟢</div>
-          <div class="tech-orb__name">Node.js</div>
-          <div class="tech-orb__category">Runtime</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🐳</div>
-          <div class="tech-orb__name">Docker</div>
-          <div class="tech-orb__category">Containers</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">☁️</div>
-          <div class="tech-orb__name">AWS / GCP</div>
-          <div class="tech-orb__category">Cloud</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🍃</div>
-          <div class="tech-orb__name">MongoDB</div>
-          <div class="tech-orb__category">NoSQL</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🐘</div>
-          <div class="tech-orb__name">PostgreSQL</div>
-          <div class="tech-orb__category">RDBMS</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🔴</div>
-          <div class="tech-orb__name">Redis</div>
-          <div class="tech-orb__category">Cache / Queue</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">▲</div>
-          <div class="tech-orb__name">Vercel</div>
-          <div class="tech-orb__category">Deploy</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FRONTEND ==================== -->
-  <section class="section" id="frontend">
-    <div class="container">
-      <div class="section__header reveal">
-        <span class="section__label">Frontend & UI</span>
-        <h2 class="section__title">The <span class="text-gradient">Interface</span> Layer</h2>
-      </div>
-
-      <div class="grid-4 stagger-children">
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">⚛️</div>
-          <div class="tech-orb__name">React / Next.js</div>
-          <div class="tech-orb__category">Framework</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🎨</div>
-          <div class="tech-orb__name">Tailwind CSS</div>
-          <div class="tech-orb__category">Styling</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">🖼️</div>
-          <div class="tech-orb__name">Framer Motion</div>
-          <div class="tech-orb__category">Animation</div>
-        </div>
-        <div class="tech-orb" data-tilt="5">
-          <div class="tech-orb__icon">📱</div>
-          <div class="tech-orb__name">React Native</div>
-          <div class="tech-orb__category">Mobile</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PROFICIENCY ==================== -->
-  <section class="section" id="proficiency">
-    <div class="container">
-      <div class="section__header reveal">
-        <span class="section__label">Proficiency</span>
-        <h2 class="section__title"><span class="text-gradient">Mastery</span> Levels</h2>
-      </div>
-
-      <div class="grid-2 reveal" style="gap:48px; max-width:900px; margin:0 auto;">
-        <div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">Python / AI Engineering</span>
-              <span class="skill-bar__pct">95%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="95%"></div></div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">System Architecture</span>
-              <span class="skill-bar__pct">92%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="92%"></div></div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">Automation & Pipelines</span>
-              <span class="skill-bar__pct">94%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="94%"></div></div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">LLM / Agent Frameworks</span>
-              <span class="skill-bar__pct">90%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="90%"></div></div>
-          </div>
-        </div>
-
-        <div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">React / Next.js</span>
-              <span class="skill-bar__pct">88%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="88%"></div></div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">Cloud / DevOps</span>
-              <span class="skill-bar__pct">85%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="85%"></div></div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">Database Design</span>
-              <span class="skill-bar__pct">90%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="90%"></div></div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-bar__header">
-              <span class="skill-bar__name">API Design</span>
-              <span class="skill-bar__pct">93%</span>
-            </div>
-            <div class="skill-bar__track"><div class="skill-bar__fill" data-width="93%"></div></div>
-          </div>
+      <div class="reveal">
+        <h2>Powered by the<br><span class="gradient-text">right tools</span></h2>
+        <p>The stack is only as good as the engineer wielding it.</p>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:40px;">
+          <div class="magnetic"><a href="systems.html" class="btn-primary page-link">View Systems →</a></div>
         </div>
       </div>
     </div>
@@ -309,35 +254,34 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <div class="footer__logo">HT.</div>
-          <p class="footer__tagline">Architecting intelligent systems that automate, scale, and deliver measurable business outcomes.</p>
-        </div>
-        <div>
-          <div class="footer__col-title">Pages</div>
-          <a href="index.html" class="footer__link">Home</a>
-          <a href="stack.html" class="footer__link">Tech Stack</a>
-          <a href="systems.html" class="footer__link">Systems</a>
-          <a href="diagrams.html" class="footer__link">Architecture</a>
-        </div>
-        <div>
-          <div class="footer__col-title">Connect</div>
-          <a href="mailto:hashaamtanveer@outlook.com" class="footer__link">Email</a>
-          <a href="https://github.com/hashaamtak" class="footer__link" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/hashaamtanveer" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>© 2026 HT. Systems. All rights reserved.</span>
-        <div class="footer__socials">
-          <a href="https://github.com/hashaamtak" class="footer__social" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-          <a href="https://linkedin.com/in/hashaamtanveer" class="footer__social" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
-          <a href="mailto:hashaamtanveer@outlook.com" class="footer__social" aria-label="Email">@</a>
-        </div>
+      <div class="footer-brand"><span>HT.</span></div>
+      <p class="footer-text">Hashaam Tanveer — AI Systems Engineer</p>
+      <div class="footer-links">
+        <a href="index.html" class="page-link">Home</a>
+        <a href="stack.html">Stack</a>
+        <a href="systems.html" class="page-link">Systems</a>
+        <a href="diagrams.html" class="page-link">Diagrams</a>
       </div>
     </div>
   </footer>
+
+  <!-- AI Chat -->
+  <div class="ai-chat">
+    <div class="ai-chat-window">
+      <div class="ai-chat-header">
+        <div class="ai-avatar">AI</div>
+        <div class="ai-info"><h4>AI Assistant</h4><span>Online</span></div>
+      </div>
+      <div class="ai-chat-messages">
+        <div class="ai-msg bot">Welcome to the Stack page! Ask me about any technology I use.</div>
+      </div>
+      <div class="ai-chat-input">
+        <input type="text" placeholder="Ask about our stack...">
+        <button aria-label="Send"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 2L7 9M14 2l-5 12-2-5-5-2 12-5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div class="ai-chat-toggle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 017 7v4a7 7 0 01-14 0V9a7 7 0 017-7z" stroke="currentColor" stroke-width="1.5"/><path d="M8 10h.01M16 10h.01M9 15a3 3 0 006 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
