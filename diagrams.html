@@ -1,57 +1,628 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HT. Systems Architecture — Interactive diagrams of the systems and patterns we design.">
+  <title>Architecture — HT. Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⚡</text></svg>">
 
-<title>Workflow Diagrams</title>
+  <style>
+    /* ---- Diagram Page Specific ---- */
 
-<style>
+    /* Interactive diagram container */
+    .arch-diagram {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
 
-body{
-background:#011a17;
-font-family:Inter;
-color:white;
-padding:120px 20px;
-text-align:center;
-}
+    .arch-diagram svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
 
-.diagram{
-max-width:900px;
-margin:60px auto;
-background:#042a26;
-padding:25px;
-border-radius:10px;
-border:1px solid #064d44;
-}
+    /* Diagram tabs */
+    .diagram-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
 
-.diagram img{
-width:100%;
-border-radius:8px;
-}
+    .diagram-tab {
+      padding: 10px 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-glass);
+      border: var(--glass-border);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
 
-</style>
+    .diagram-tab:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass-hover);
+    }
 
+    .diagram-tab.active {
+      color: #fff;
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+
+    /* Diagram panels */
+    .diagram-panel {
+      display: none;
+    }
+
+    .diagram-panel.active {
+      display: block;
+      animation: fadeInDiagram 0.5s var(--ease-out-expo);
+    }
+
+    @keyframes fadeInDiagram {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Node styles */
+    .node {
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .node:hover {
+      filter: brightness(1.3) drop-shadow(0 0 12px rgba(124, 92, 252, 0.5));
+    }
+
+    /* Animated flow lines */
+    .flow-line {
+      stroke-dasharray: 8 4;
+      animation: flowDash 1.5s linear infinite;
+    }
+
+    @keyframes flowDash {
+      to { stroke-dashoffset: -24; }
+    }
+
+    /* Pattern explanation cards */
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pattern-card {
+      background: var(--bg-card);
+      border: var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: var(--transition-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pattern-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--grad-hero);
+      opacity: 0;
+      transition: var(--transition-fast);
+    }
+
+    .pattern-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .pattern-card:hover::after {
+      opacity: 1;
+    }
+
+    .pattern-card__icon {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+
+    .pattern-card__title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pattern-card__desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* Tooltip on hover */
+    .node-tooltip {
+      position: fixed;
+      z-index: 10000;
+      background: rgba(14,14,36,0.95);
+      border: 1px solid rgba(124,92,252,0.3);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s, transform 0.2s;
+      max-width: 220px;
+      backdrop-filter: blur(20px);
+    }
+
+    .node-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .node-tooltip__title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--accent-primary);
+    }
+
+    @media (max-width: 768px) {
+      .pattern-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="noise" aria-hidden="true"></div>
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-<h1>Automation Workflow Diagrams</h1>
+  <div class="loader-overlay" role="status" aria-label="Loading">
+    <div class="loader-logo">HT.</div>
+    <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+  </div>
 
-<div class="diagram">
-<h3>Lead Lifecycle Automation</h3>
-<img src="images/Lead pass Workflow.png">
-</div>
+  <!-- Nav -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">HT.</a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="stack.html" class="nav__link">Stack</a>
+        <a href="systems.html" class="nav__link">Systems</a>
+        <a href="diagrams.html" class="nav__link">Architecture</a>
+        <a href="mailto:hashaamtanveer@outlook.com" class="nav__cta" data-magnetic>Start Project</a>
+      </div>
+      <button class="nav__burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
 
-<div class="diagram">
-<h3>Webinar Campaign Automation</h3>
-<img src="images/Webinar wf.png">
-</div>
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" style="min-height: 60vh;">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__grid"></div>
+      <div class="hero__orb hero__orb--2" style="opacity:0.15;"></div>
+    </div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge reveal">
+          <span class="hero__badge-dot"></span>
+          System Design
+        </div>
+        <h1 class="hero__title reveal" style="transition-delay:0.1s">
+          <span class="text-gradient">Architecture</span> Patterns
+        </h1>
+        <p class="hero__subtitle reveal" style="transition-delay:0.2s">
+          Interactive diagrams of the system architectures and design patterns we implement — from AI agents to event-driven pipelines.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<div class="diagram">
-<h3>Marketing Campaign Segmentation</h3>
-<img src="images/Education Campaign.png">
-</div>
+  <!-- ==================== INTERACTIVE DIAGRAMS ==================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
 
-<a href="index.html">Back to Portfolio</a>
+      <!-- Tabs -->
+      <div class="diagram-tabs reveal" role="tablist">
+        <button class="diagram-tab active" data-tab="agent" role="tab" aria-selected="true">AI Agent Architecture</button>
+        <button class="diagram-tab" data-tab="pipeline" role="tab" aria-selected="false">Data Pipeline</button>
+        <button class="diagram-tab" data-tab="microservices" role="tab" aria-selected="false">Microservices</button>
+      </div>
 
+      <!-- Panel 1: AI Agent -->
+      <div class="diagram-panel active" id="panel-agent" role="tabpanel">
+        <div class="diagram-canvas reveal-scale">
+          <div class="arch-diagram">
+            <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" aria-label="AI Agent Architecture Diagram">
+              <!-- Background dots -->
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#7c5cfc;stop-opacity:0.8"/>
+                  <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.8"/>
+                </linearGradient>
+                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.8"/>
+                  <stop offset="100%" style="stop-color:#34d399;stop-opacity:0.8"/>
+                </linearGradient>
+                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#f472b6;stop-opacity:0.8"/>
+                  <stop offset="100%" style="stop-color:#7c5cfc;stop-opacity:0.8"/>
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+
+              <!-- Flow lines -->
+              <line x1="175" y1="120" x2="350" y2="190" stroke="rgba(124,92,252,0.3)" stroke-width="2" class="flow-line"/>
+              <line x1="175" y1="320" x2="350" y2="250" stroke="rgba(124,92,252,0.3)" stroke-width="2" class="flow-line"/>
+              <line x1="530" y1="220" x2="680" y2="120" stroke="rgba(6,182,212,0.3)" stroke-width="2" class="flow-line"/>
+              <line x1="530" y1="220" x2="680" y2="220" stroke="rgba(6,182,212,0.3)" stroke-width="2" class="flow-line"/>
+              <line x1="530" y1="220" x2="680" y2="320" stroke="rgba(6,182,212,0.3)" stroke-width="2" class="flow-line"/>
+              <line x1="530" y1="260" x2="440" y2="400" stroke="rgba(244,114,182,0.2)" stroke-width="1.5" class="flow-line" style="animation-direction:reverse"/>
+
+              <!-- User Input Node -->
+              <g class="node" data-tooltip="User Input" data-desc="Natural language queries and commands enter the system">
+                <rect x="40" y="85" width="135" height="70" rx="14" fill="rgba(124,92,252,0.1)" stroke="rgba(124,92,252,0.4)" stroke-width="1.5"/>
+                <text x="107" y="115" text-anchor="middle" fill="#c4b5fd" font-family="Outfit" font-size="11" font-weight="600">USER</text>
+                <text x="107" y="135" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Query Input</text>
+              </g>
+
+              <!-- Context Node -->
+              <g class="node" data-tooltip="Vector Memory" data-desc="Persistent vector store for context retrieval and long-term memory">
+                <rect x="40" y="285" width="135" height="70" rx="14" fill="rgba(124,92,252,0.1)" stroke="rgba(124,92,252,0.4)" stroke-width="1.5"/>
+                <text x="107" y="315" text-anchor="middle" fill="#c4b5fd" font-family="Outfit" font-size="11" font-weight="600">MEMORY</text>
+                <text x="107" y="335" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Vector Store</text>
+              </g>
+
+              <!-- Agent Core -->
+              <g class="node" data-tooltip="Agent Core" data-desc="Central reasoning engine — plans, decides, and orchestrates tool usage">
+                <rect x="330" y="165" width="200" height="110" rx="18" fill="url(#grad1)" fill-opacity="0.12" stroke="url(#grad1)" stroke-width="2" filter="url(#glow)"/>
+                <text x="430" y="205" text-anchor="middle" fill="#f0f0f5" font-family="Outfit" font-size="15" font-weight="700">AI AGENT</text>
+                <text x="430" y="228" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Reasoning • Planning</text>
+                <text x="430" y="248" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Tool Selection • Execution</text>
+              </g>
+
+              <!-- Tool 1 -->
+              <g class="node" data-tooltip="Search Tool" data-desc="Web search and document retrieval for real-time information">
+                <rect x="660" y="85" width="140" height="65" rx="12" fill="rgba(6,182,212,0.1)" stroke="rgba(6,182,212,0.4)" stroke-width="1.5"/>
+                <text x="730" y="112" text-anchor="middle" fill="#67e8f9" font-family="Outfit" font-size="11" font-weight="600">SEARCH</text>
+                <text x="730" y="132" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Web + Docs</text>
+              </g>
+
+              <!-- Tool 2 -->
+              <g class="node" data-tooltip="Code Executor" data-desc="Sandboxed code execution environment for data analysis and computation">
+                <rect x="660" y="185" width="140" height="65" rx="12" fill="rgba(6,182,212,0.1)" stroke="rgba(6,182,212,0.4)" stroke-width="1.5"/>
+                <text x="730" y="212" text-anchor="middle" fill="#67e8f9" font-family="Outfit" font-size="11" font-weight="600">CODE EXEC</text>
+                <text x="730" y="232" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Python / JS</text>
+              </g>
+
+              <!-- Tool 3 -->
+              <g class="node" data-tooltip="API Integrations" data-desc="External API calls for CRM, email, calendar, and third-party services">
+                <rect x="660" y="285" width="140" height="65" rx="12" fill="rgba(6,182,212,0.1)" stroke="rgba(6,182,212,0.4)" stroke-width="1.5"/>
+                <text x="730" y="312" text-anchor="middle" fill="#67e8f9" font-family="Outfit" font-size="11" font-weight="600">APIs</text>
+                <text x="730" y="332" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">CRM • Email • DB</text>
+              </g>
+
+              <!-- Output -->
+              <g class="node" data-tooltip="Output Synthesis" data-desc="Final response synthesis with citations and structured formatting">
+                <rect x="370" y="370" width="130" height="65" rx="12" fill="rgba(244,114,182,0.1)" stroke="rgba(244,114,182,0.4)" stroke-width="1.5"/>
+                <text x="435" y="397" text-anchor="middle" fill="#f9a8d4" font-family="Outfit" font-size="11" font-weight="600">OUTPUT</text>
+                <text x="435" y="417" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="10">Synthesized Response</text>
+              </g>
+
+              <!-- Labels -->
+              <text x="450" y="30" text-anchor="middle" fill="rgba(255,255,255,0.08)" font-family="Outfit" font-size="48" font-weight="800">AGENT FLOW</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Data Pipeline -->
+      <div class="diagram-panel" id="panel-pipeline" role="tabpanel">
+        <div class="diagram-canvas reveal-scale">
+          <div class="arch-diagram">
+            <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" aria-label="Data Pipeline Architecture Diagram">
+              <defs>
+                <linearGradient id="pipeGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+                  <stop offset="0%" style="stop-color:#7c5cfc;stop-opacity:0.5"/>
+                  <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.5"/>
+                  <stop offset="100%" style="stop-color:#34d399;stop-opacity:0.5"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Main flow line -->
+              <line x1="120" y1="200" x2="800" y2="200" stroke="url(#pipeGrad)" stroke-width="3" class="flow-line"/>
+
+              <!-- Stage 1: Ingest -->
+              <g class="node" data-tooltip="Data Ingestion" data-desc="Webhooks, APIs, file uploads, and streaming sources feed into the pipeline">
+                <rect x="40" y="150" width="140" height="100" rx="16" fill="rgba(124,92,252,0.1)" stroke="rgba(124,92,252,0.4)" stroke-width="1.5"/>
+                <text x="110" y="185" text-anchor="middle" fill="#c4b5fd" font-family="Outfit" font-size="13" font-weight="700">INGEST</text>
+                <text x="110" y="205" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Webhooks</text>
+                <text x="110" y="220" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">APIs • Streams</text>
+                <text x="110" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">File Uploads</text>
+              </g>
+
+              <!-- Stage 2: Transform -->
+              <g class="node" data-tooltip="Transform" data-desc="Schema normalization, validation, deduplication, and data enrichment">
+                <rect x="230" y="150" width="140" height="100" rx="16" fill="rgba(99,102,241,0.1)" stroke="rgba(99,102,241,0.4)" stroke-width="1.5"/>
+                <text x="300" y="185" text-anchor="middle" fill="#a5b4fc" font-family="Outfit" font-size="13" font-weight="700">TRANSFORM</text>
+                <text x="300" y="205" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Normalize</text>
+                <text x="300" y="220" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Validate • Clean</text>
+                <text x="300" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Deduplicate</text>
+              </g>
+
+              <!-- Stage 3: Enrich -->
+              <g class="node" data-tooltip="AI Enrichment" data-desc="ML classification, entity extraction, and sentiment analysis on processed data">
+                <rect x="420" y="150" width="140" height="100" rx="16" fill="rgba(6,182,212,0.1)" stroke="rgba(6,182,212,0.4)" stroke-width="1.5"/>
+                <text x="490" y="185" text-anchor="middle" fill="#67e8f9" font-family="Outfit" font-size="13" font-weight="700">ENRICH</text>
+                <text x="490" y="205" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">AI Classification</text>
+                <text x="490" y="220" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Entity Extraction</text>
+                <text x="490" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Sentiment</text>
+              </g>
+
+              <!-- Stage 4: Route -->
+              <g class="node" data-tooltip="Smart Router" data-desc="Rule-based and ML-powered routing to the correct destination systems">
+                <rect x="610" y="150" width="140" height="100" rx="16" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+                <text x="680" y="185" text-anchor="middle" fill="#6ee7b7" font-family="Outfit" font-size="13" font-weight="700">ROUTE</text>
+                <text x="680" y="205" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Smart Routing</text>
+                <text x="680" y="220" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Load Balance</text>
+                <text x="680" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Priority Queue</text>
+              </g>
+
+              <!-- Destinations -->
+              <g class="node" data-tooltip="Destinations" data-desc="Database storage, real-time dashboards, alert systems, and notification channels">
+                <rect x="770" y="100" width="110" height="50" rx="10" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.3)" stroke-width="1"/>
+                <text x="825" y="130" text-anchor="middle" fill="#6ee7b7" font-family="Sora" font-size="10" font-weight="600">Database</text>
+              </g>
+              <g class="node" data-tooltip="Dashboard" data-desc="Real-time metrics and analytics visualization">
+                <rect x="770" y="175" width="110" height="50" rx="10" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.3)" stroke-width="1"/>
+                <text x="825" y="205" text-anchor="middle" fill="#6ee7b7" font-family="Sora" font-size="10" font-weight="600">Dashboard</text>
+              </g>
+              <g class="node" data-tooltip="Alerts" data-desc="Automated alerting and notification system">
+                <rect x="770" y="250" width="110" height="50" rx="10" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.3)" stroke-width="1"/>
+                <text x="825" y="280" text-anchor="middle" fill="#6ee7b7" font-family="Sora" font-size="10" font-weight="600">Alerts</text>
+              </g>
+
+              <!-- Monitoring bar -->
+              <rect x="40" y="330" width="720" height="40" rx="10" fill="rgba(244,114,182,0.05)" stroke="rgba(244,114,182,0.2)" stroke-width="1"/>
+              <text x="400" y="355" text-anchor="middle" fill="#f9a8d4" font-family="Outfit" font-size="11" font-weight="600">MONITORING &amp; OBSERVABILITY — Prometheus • Grafana • Custom Alerts</text>
+
+              <text x="450" y="45" text-anchor="middle" fill="rgba(255,255,255,0.06)" font-family="Outfit" font-size="48" font-weight="800">PIPELINE</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3: Microservices -->
+      <div class="diagram-panel" id="panel-microservices" role="tabpanel">
+        <div class="diagram-canvas reveal-scale">
+          <div class="arch-diagram">
+            <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" aria-label="Microservices Architecture Diagram">
+              <!-- API Gateway -->
+              <g class="node" data-tooltip="API Gateway" data-desc="Central entry point handling auth, rate limiting, and request routing">
+                <rect x="340" y="30" width="220" height="70" rx="14" fill="rgba(124,92,252,0.12)" stroke="rgba(124,92,252,0.5)" stroke-width="2"/>
+                <text x="450" y="60" text-anchor="middle" fill="#c4b5fd" font-family="Outfit" font-size="14" font-weight="700">API GATEWAY</text>
+                <text x="450" y="80" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Auth • Rate Limit • Route</text>
+              </g>
+
+              <!-- Lines from gateway -->
+              <line x1="380" y1="100" x2="130" y2="180" stroke="rgba(124,92,252,0.2)" stroke-width="1.5" class="flow-line"/>
+              <line x1="450" y1="100" x2="450" y2="180" stroke="rgba(124,92,252,0.2)" stroke-width="1.5" class="flow-line"/>
+              <line x1="520" y1="100" x2="770" y2="180" stroke="rgba(124,92,252,0.2)" stroke-width="1.5" class="flow-line"/>
+
+              <!-- Service 1: Auth -->
+              <g class="node" data-tooltip="Auth Service" data-desc="JWT authentication, OAuth, RBAC, and session management">
+                <rect x="50" y="180" width="160" height="90" rx="14" fill="rgba(99,102,241,0.08)" stroke="rgba(99,102,241,0.35)" stroke-width="1.5"/>
+                <text x="130" y="215" text-anchor="middle" fill="#a5b4fc" font-family="Outfit" font-size="12" font-weight="700">AUTH SERVICE</text>
+                <text x="130" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">JWT • OAuth • RBAC</text>
+                <text x="130" y="252" text-anchor="middle" fill="#5a5a7a" font-family="Sora" font-size="8">Node.js + Redis</text>
+              </g>
+
+              <!-- Service 2: Core -->
+              <g class="node" data-tooltip="Core Service" data-desc="Business logic, CRUD operations, and domain-specific processing">
+                <rect x="370" y="180" width="160" height="90" rx="14" fill="rgba(6,182,212,0.08)" stroke="rgba(6,182,212,0.35)" stroke-width="1.5"/>
+                <text x="450" y="215" text-anchor="middle" fill="#67e8f9" font-family="Outfit" font-size="12" font-weight="700">CORE SERVICE</text>
+                <text x="450" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">Business Logic</text>
+                <text x="450" y="252" text-anchor="middle" fill="#5a5a7a" font-family="Sora" font-size="8">FastAPI + PostgreSQL</text>
+              </g>
+
+              <!-- Service 3: AI -->
+              <g class="node" data-tooltip="AI Service" data-desc="ML inference, LLM orchestration, and intelligent processing">
+                <rect x="690" y="180" width="160" height="90" rx="14" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.35)" stroke-width="1.5"/>
+                <text x="770" y="215" text-anchor="middle" fill="#6ee7b7" font-family="Outfit" font-size="12" font-weight="700">AI SERVICE</text>
+                <text x="770" y="235" text-anchor="middle" fill="#9595b0" font-family="Sora" font-size="9">ML Inference • LLM</text>
+                <text x="770" y="252" text-anchor="middle" fill="#5a5a7a" font-family="Sora" font-size="8">Python + PyTorch</text>
+              </g>
+
+              <!-- Message Bus -->
+              <rect x="50" y="320" width="800" height="50" rx="12" fill="rgba(244,114,182,0.06)" stroke="rgba(244,114,182,0.25)" stroke-width="1.5" stroke-dasharray="6 3"/>
+              <text x="450" y="350" text-anchor="middle" fill="#f9a8d4" font-family="Outfit" font-size="12" font-weight="700">EVENT BUS — Redis Streams / RabbitMQ</text>
+
+              <!-- Lines to bus -->
+              <line x1="130" y1="270" x2="130" y2="320" stroke="rgba(244,114,182,0.2)" stroke-width="1" class="flow-line"/>
+              <line x1="450" y1="270" x2="450" y2="320" stroke="rgba(244,114,182,0.2)" stroke-width="1" class="flow-line"/>
+              <line x1="770" y1="270" x2="770" y2="320" stroke="rgba(244,114,182,0.2)" stroke-width="1" class="flow-line"/>
+
+              <!-- Data Layer -->
+              <line x1="200" y1="370" x2="200" y2="420" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+              <line x1="450" y1="370" x2="450" y2="420" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+              <line x1="700" y1="370" x2="700" y2="420" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+              <g class="node" data-tooltip="PostgreSQL" data-desc="Primary relational database for structured data">
+                <rect x="135" y="420" width="130" height="55" rx="10" fill="rgba(124,92,252,0.06)" stroke="rgba(124,92,252,0.2)" stroke-width="1"/>
+                <text x="200" y="445" text-anchor="middle" fill="#c4b5fd" font-family="Outfit" font-size="11" font-weight="600">PostgreSQL</text>
+                <text x="200" y="462" text-anchor="middle" fill="#5a5a7a" font-family="Sora" font-size="8">Primary DB</text>
+              </g>
+
+              <g class="node" data-tooltip="Redis Cache" data-desc="In-memory cache and session store for high-performance reads">
+                <rect x="385" y="420" width="130" height="55" rx="10" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.2)" stroke-width="1"/>
+                <text x="450" y="445" text-anchor="middle" fill="#67e8f9" font-family="Outfit" font-size="11" font-weight="600">Redis</text>
+                <text x="450" y="462" text-anchor="middle" fill="#5a5a7a" font-family="Sora" font-size="8">Cache + Sessions</text>
+              </g>
+
+              <g class="node" data-tooltip="Vector DB" data-desc="Pinecone vector database for AI embeddings and semantic search">
+                <rect x="635" y="420" width="130" height="55" rx="10" fill="rgba(52,211,153,0.06)" stroke="rgba(52,211,153,0.2)" stroke-width="1"/>
+                <text x="700" y="445" text-anchor="middle" fill="#6ee7b7" font-family="Outfit" font-size="11" font-weight="600">Pinecone</text>
+                <text x="700" y="462" text-anchor="middle" fill="#5a5a7a" font-family="Sora" font-size="8">Vector Store</text>
+              </g>
+
+              <text x="450" y="20" text-anchor="middle" fill="rgba(255,255,255,0.05)" font-family="Outfit" font-size="44" font-weight="800">MICROSERVICES</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== PATTERNS ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">Design Patterns</span>
+        <h2 class="section__title">How We <span class="text-gradient">Think</span> About Systems</h2>
+        <p class="section__desc">Core architectural principles that guide every system we build.</p>
+      </div>
+
+      <div class="pattern-grid stagger-children">
+        <div class="pattern-card" data-tilt="5">
+          <div class="pattern-card__icon">🔄</div>
+          <h3 class="pattern-card__title">Event-Driven</h3>
+          <p class="pattern-card__desc">Decoupled services communicating through events — enabling real-time processing, resilience, and infinite scalability.</p>
+        </div>
+        <div class="pattern-card" data-tilt="5">
+          <div class="pattern-card__icon">🧩</div>
+          <h3 class="pattern-card__title">Domain-Driven Design</h3>
+          <p class="pattern-card__desc">Modeling software around business domains with bounded contexts — ensuring the code mirrors real-world processes.</p>
+        </div>
+        <div class="pattern-card" data-tilt="5">
+          <div class="pattern-card__icon">📦</div>
+          <h3 class="pattern-card__title">CQRS + Event Sourcing</h3>
+          <p class="pattern-card__desc">Separating reads from writes with full event history — enabling powerful auditing, replay, and temporal queries.</p>
+        </div>
+        <div class="pattern-card" data-tilt="5">
+          <div class="pattern-card__icon">🔐</div>
+          <h3 class="pattern-card__title">Zero Trust Security</h3>
+          <p class="pattern-card__desc">Every request is verified, every connection encrypted, every access logged — security is architecture, not an afterthought.</p>
+        </div>
+        <div class="pattern-card" data-tilt="5">
+          <div class="pattern-card__icon">📈</div>
+          <h3 class="pattern-card__title">Observability First</h3>
+          <p class="pattern-card__desc">Structured logging, distributed tracing, and metrics from day one — because you can't improve what you can't measure.</p>
+        </div>
+        <div class="pattern-card" data-tilt="5">
+          <div class="pattern-card__icon">🚀</div>
+          <h3 class="pattern-card__title">Progressive Delivery</h3>
+          <p class="pattern-card__desc">Feature flags, canary deploys, and blue-green releases — shipping fast with confidence, not recklessness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-bottom: 40px;">
+    <div class="container">
+      <div class="glass-card reveal-scale" style="padding: clamp(40px, 6vw, 80px); text-align:center; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:-50%; right:-20%; width:400px; height:400px; background:var(--accent-secondary); border-radius:50%; filter:blur(120px); opacity:0.12; pointer-events:none;" aria-hidden="true"></div>
+        <span class="section__label" style="position:relative;">Need an Architecture Review?</span>
+        <h2 class="section__title" style="position:relative; margin-bottom: 16px;">Let's <span class="text-gradient">Design</span> Your System</h2>
+        <p class="section__desc" style="position:relative; max-width:550px; margin: 0 auto 32px;">From whiteboard to production — we'll architect a system that scales with your ambitions.</p>
+        <a href="mailto:hashaamtanveer@outlook.com" class="btn btn--primary" data-magnetic style="position:relative;">
+          Book a Session <span class="btn__arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">HT.</div>
+          <p class="footer__tagline">Architecting intelligent systems that automate, scale, and deliver measurable business outcomes.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Pages</div>
+          <a href="index.html" class="footer__link">Home</a>
+          <a href="stack.html" class="footer__link">Tech Stack</a>
+          <a href="systems.html" class="footer__link">Systems</a>
+          <a href="diagrams.html" class="footer__link">Architecture</a>
+        </div>
+        <div>
+          <div class="footer__col-title">Connect</div>
+          <a href="mailto:hashaamtanveer@outlook.com" class="footer__link">Email</a>
+          <a href="https://github.com/hashaamtak" class="footer__link" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/hashaamtanveer" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 HT. Systems. All rights reserved.</span>
+        <div class="footer__socials">
+          <a href="https://github.com/hashaamtak" class="footer__social" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
+          <a href="https://linkedin.com/in/hashaamtanveer" class="footer__social" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
+          <a href="mailto:hashaamtanveer@outlook.com" class="footer__social" aria-label="Email">@</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tooltip element -->
+  <div class="node-tooltip" id="nodeTooltip" aria-hidden="true">
+    <div class="node-tooltip__title"></div>
+    <div class="node-tooltip__desc"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* Diagram page — tab switching */
+    document.querySelectorAll('.diagram-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.diagram-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.diagram-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const panel = document.getElementById('panel-' + tab.dataset.tab);
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    /* SVG node tooltips */
+    const tooltip = document.getElementById('nodeTooltip');
+    document.querySelectorAll('.node[data-tooltip]').forEach(node => {
+      node.addEventListener('mouseenter', (e) => {
+        const title = node.getAttribute('data-tooltip');
+        const desc = node.getAttribute('data-desc') || '';
+        tooltip.querySelector('.node-tooltip__title').textContent = title;
+        tooltip.querySelector('.node-tooltip__desc').textContent = desc;
+        tooltip.classList.add('show');
+      });
+
+      node.addEventListener('mousemove', (e) => {
+        tooltip.style.left = (e.clientX + 16) + 'px';
+        tooltip.style.top = (e.clientY - 10) + 'px';
+      });
+
+      node.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('show');
+      });
+    });
+  </script>
 </body>
 </html>
