@@ -1,3 +1,4 @@
+window.addEventListener("load", () => {
 // ==========================
 // GSAP INIT
 // ==========================
@@ -226,67 +227,51 @@ window.addEventListener("mousemove", e => {
 // HERO CANVAS (OPTIMIZED)
 // ==========================
 const canvas = document.getElementById("hero-canvas");
-const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+if (canvas) {
+  const ctx = canvas.getContext("2d");
 
-let particles = [];
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-for (let i = 0; i < 40; i++) { // reduced for performance
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5
-  });
-}
+  let particles = [];
 
-// LIMIT FPS (BIG PERFORMANCE BOOST)
-let lastTime = 0;
-
-function draw(time) {
-
-  if (time - lastTime < 33) {
-    requestAnimationFrame(draw);
-    return;
+  for (let i = 0; i < 40; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5
+    });
   }
 
-  lastTime = time;
+  let lastTime = 0;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  function draw(time) {
+    if (time - lastTime < 33) {
+      requestAnimationFrame(draw);
+      return;
+    }
 
-  particles.forEach(p => {
+    lastTime = time;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    p.x += p.vx;
-    p.y += p.vy;
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
 
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-    ctx.fillStyle = "#4f7cff";
-    ctx.fillRect(p.x, p.y, 2, 2);
-
-    particles.forEach(p2 => {
-      const dx = p.x - p2.x;
-      const dy = p.y - p2.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 120) {
-        ctx.strokeStyle = "rgba(79,124,255,0.08)";
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      }
+      ctx.fillStyle = "#4f7cff";
+      ctx.fillRect(p.x, p.y, 2, 2);
     });
 
-  });
+    requestAnimationFrame(draw);
+  }
 
   requestAnimationFrame(draw);
 }
-
-requestAnimationFrame(draw);
 // ==========================
 // MODAL FUNCTIONS
 // ==========================
@@ -331,3 +316,4 @@ function closeDrawer() {
   document.getElementById('navDrawer').classList.remove('open');
   document.getElementById('hbgBtn').classList.remove('open');
 }
+});
