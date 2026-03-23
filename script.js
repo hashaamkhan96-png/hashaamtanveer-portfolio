@@ -1,10 +1,12 @@
 gsap.registerPlugin(ScrollTrigger);
 
 /* =========================
-   HERO CINEMATIC ENTRY
+   HERO TIMELINE (CINEMATIC)
 ========================= */
 
-gsap.timeline()
+const heroTL = gsap.timeline();
+
+heroTL
 .from(".hero-badge", {
   y: 40,
   opacity: 0,
@@ -12,64 +14,70 @@ gsap.timeline()
   ease: "power3.out"
 })
 .from(".hero-h1", {
-  y: 60,
+  y: 80,
   opacity: 0,
   duration: 1,
   ease: "power4.out"
 }, "-=0.5")
 .from(".hero-desc", {
-  y: 40,
+  y: 50,
   opacity: 0,
   duration: 0.8
 }, "-=0.6")
+.from(".hero-stats .hstat", {
+  y: 30,
+  opacity: 0,
+  stagger: 0.15
+}, "-=0.5")
 .from(".hero-btns a", {
   y: 20,
   opacity: 0,
-  stagger: 0.15,
-  duration: 0.6
-}, "-=0.5")
+  stagger: 0.1
+}, "-=0.4")
 .from(".hero-card", {
-  scale: 0.9,
+  scale: 0.92,
   opacity: 0,
-  duration: 1,
-  ease: "power3.out"
-}, "-=0.8");
+  duration: 1
+}, "-=0.7");
+
 
 /* =========================
-   SCROLL REVEAL SYSTEM
+   SCROLL STORYTELLING
 ========================= */
 
-gsap.utils.toArray(".reveal").forEach(el => {
-  gsap.from(el, {
+gsap.utils.toArray("section").forEach(section => {
+  gsap.from(section, {
     scrollTrigger: {
-      trigger: el,
-      start: "top 85%",
+      trigger: section,
+      start: "top 85%"
     },
-    y: 60,
     opacity: 0,
-    duration: 0.9,
+    y: 60,
+    duration: 1,
     ease: "power3.out"
   });
 });
 
+
 /* =========================
-   STAGGERED CARDS (WORK)
+   WORK CARDS STAGGER
 ========================= */
 
 gsap.from(".wcard", {
   scrollTrigger: {
     trigger: ".work-grid",
-    start: "top 80%"
+    start: "top 75%"
   },
-  y: 80,
+  y: 100,
   opacity: 0,
   stagger: 0.15,
   duration: 1,
   ease: "power4.out"
 });
 
+
 /* =========================
-   STACK GRID ANIMATION
+   STACK GRID POP-IN
 ========================= */
 
 gsap.from(".stile", {
@@ -80,16 +88,35 @@ gsap.from(".stile", {
   scale: 0.8,
   opacity: 0,
   stagger: 0.08,
-  duration: 0.6,
   ease: "back.out(1.7)"
 });
 
+
 /* =========================
-   PARALLAX HERO DEPTH
+   IMPACT NUMBERS COUNT-UP
+========================= */
+
+document.querySelectorAll(".icard-num").forEach(el => {
+  let value = parseInt(el.innerText);
+
+  gsap.fromTo(el, {innerText:0}, {
+    innerText:value,
+    duration:2,
+    snap:{innerText:1},
+    scrollTrigger:{
+      trigger:el,
+      start:"top 85%"
+    }
+  });
+});
+
+
+/* =========================
+   HERO PARALLAX DEPTH
 ========================= */
 
 gsap.to("#hero-canvas", {
-  yPercent: 20,
+  yPercent: 25,
   ease: "none",
   scrollTrigger: {
     trigger: ".hero",
@@ -98,6 +125,7 @@ gsap.to("#hero-canvas", {
     scrub: true
   }
 });
+
 
 /* =========================
    NAV SCROLL EFFECT
@@ -109,28 +137,107 @@ ScrollTrigger.create({
   onLeaveBack: () => document.getElementById("nav").classList.remove("scrolled")
 });
 
+
 /* =========================
    MAGNETIC BUTTONS
 ========================= */
 
-document.querySelectorAll(".btn-primary, .btn-ghost").forEach(btn => {
-  btn.addEventListener("mousemove", e => {
+document.querySelectorAll(".btn-primary, .btn-ghost").forEach(btn=>{
+  btn.addEventListener("mousemove", e=>{
     const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
 
-    gsap.to(btn, {
-      x: x * 0.2,
-      y: y * 0.2,
-      duration: 0.3
+    gsap.to(btn,{
+      x:x*0.2,
+      y:y*0.2,
+      duration:0.3
     });
   });
 
-  btn.addEventListener("mouseleave", () => {
-    gsap.to(btn, {
-      x: 0,
-      y: 0,
-      duration: 0.4
+  btn.addEventListener("mouseleave",()=>{
+    gsap.to(btn,{
+      x:0,
+      y:0,
+      duration:0.4
     });
   });
 });
+
+
+/* =========================
+   CURSOR LIGHT EFFECT
+========================= */
+
+const light = document.createElement("div");
+light.style.position="fixed";
+light.style.width="300px";
+light.style.height="300px";
+light.style.borderRadius="50%";
+light.style.pointerEvents="none";
+light.style.background="radial-gradient(circle, rgba(79,124,255,0.15), transparent 70%)";
+light.style.zIndex="1";
+document.body.appendChild(light);
+
+window.addEventListener("mousemove", e=>{
+  gsap.to(light,{
+    x:e.clientX-150,
+    y:e.clientY-150,
+    duration:0.3
+  });
+});
+
+
+/* =========================
+   HERO CANVAS NETWORK
+========================= */
+
+const canvas = document.getElementById("hero-canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    vx:(Math.random()-0.5)*0.5,
+    vy:(Math.random()-0.5)*0.5
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    if(p.x<0||p.x>canvas.width)p.vx*=-1;
+    if(p.y<0||p.y>canvas.height)p.vy*=-1;
+
+    ctx.fillStyle="#4f7cff";
+    ctx.fillRect(p.x,p.y,2,2);
+
+    particles.forEach(p2=>{
+      const dx=p.x-p2.x;
+      const dy=p.y-p2.y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+
+      if(dist<120){
+        ctx.strokeStyle="rgba(79,124,255,0.08)";
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(p2.x,p2.y);
+        ctx.stroke();
+      }
+    });
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
