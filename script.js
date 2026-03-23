@@ -287,3 +287,40 @@ function draw(time) {
 }
 
 requestAnimationFrame(draw);
+// ==========================
+// MODAL FUNCTIONS
+// ==========================
+function openModal(src) {
+  document.getElementById('modalImg').src = src;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('modal')) {
+    closeModal();
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+
+// ==========================
+// NAV DRAWER (MOBILE)
+// ==========================
+function toggleDrawer() {
+  document.getElementById('navDrawer').classList.toggle('open');
+  document.getElementById('hbgBtn').classList.toggle('open');
+}
+
+function closeDrawer() {
+  document.getElementById('navDrawer').classList.remove('open');
+  document.getElementById('hbgBtn').classList.remove('open');
+}
