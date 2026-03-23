@@ -1,9 +1,12 @@
+// ==========================
+// GSAP INIT
+// ==========================
 gsap.registerPlugin(ScrollTrigger);
 
-/* =========================
-   HERO TIMELINE (CINEMATIC)
-========================= */
 
+// ==========================
+// HERO ENTRY (CINEMATIC)
+// ==========================
 const heroTL = gsap.timeline();
 
 heroTL
@@ -41,82 +44,83 @@ heroTL
 }, "-=0.7");
 
 
-/* =========================
-   SCROLL STORYTELLING
-========================= */
+// ==========================
+// SECTION STORYTELLING (UPGRADE)
+// ==========================
+gsap.utils.toArray("section").forEach((section) => {
 
-gsap.utils.toArray("section").forEach(section => {
-  gsap.from(section, {
+  const elements = section.querySelectorAll(
+    ".section-title, .section-sub, .wcard, .stile, .icard, p, h2"
+  );
+
+  gsap.from(elements, {
     scrollTrigger: {
       trigger: section,
-      start: "top 85%"
+      start: "top 75%"
     },
+    y: 80,
     opacity: 0,
-    y: 60,
-    duration: 1,
-    ease: "power3.out"
+    duration: 1.2,
+    ease: "power3.out",
+    stagger: 0.12
   });
+
 });
 
 
-/* =========================
-   WORK CARDS STAGGER
-========================= */
-
+// ==========================
+// WORK CARDS STAGGER
+// ==========================
 gsap.from(".wcard", {
   scrollTrigger: {
     trigger: ".work-grid",
-    start: "top 75%"
+    start: "top 80%"
   },
   y: 100,
   opacity: 0,
   stagger: 0.15,
-  duration: 1,
   ease: "power4.out"
 });
 
 
-/* =========================
-   STACK GRID POP-IN
-========================= */
-
+// ==========================
+// STACK GRID POP
+// ==========================
 gsap.from(".stile", {
   scrollTrigger: {
     trigger: ".stack-grid",
     start: "top 80%"
   },
-  scale: 0.8,
+  scale: 0.85,
   opacity: 0,
   stagger: 0.08,
   ease: "back.out(1.7)"
 });
 
 
-/* =========================
-   IMPACT NUMBERS COUNT-UP
-========================= */
-
+// ==========================
+// IMPACT COUNT-UP
+// ==========================
 document.querySelectorAll(".icard-num").forEach(el => {
   let value = parseInt(el.innerText);
 
-  gsap.fromTo(el, {innerText:0}, {
-    innerText:value,
-    duration:2,
-    snap:{innerText:1},
-    scrollTrigger:{
-      trigger:el,
-      start:"top 85%"
+  gsap.fromTo(el, {innerText: 0}, {
+    innerText: value,
+    duration: 2,
+    snap: { innerText: 1 },
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%"
     }
   });
 });
 
 
-/* =========================
-   HERO PARALLAX DEPTH
-========================= */
-
+// ==========================
+// HERO PARALLAX
+// ==========================
 gsap.to("#hero-canvas", {
-  yPercent: 25,
+  yPercent: 20,
   ease: "none",
   scrollTrigger: {
     trigger: ".hero",
@@ -127,10 +131,9 @@ gsap.to("#hero-canvas", {
 });
 
 
-/* =========================
-   NAV SCROLL EFFECT
-========================= */
-
+// ==========================
+// NAV SCROLL EFFECT
+// ==========================
 ScrollTrigger.create({
   start: "top -80",
   onEnter: () => document.getElementById("nav").classList.add("scrolled"),
@@ -138,60 +141,90 @@ ScrollTrigger.create({
 });
 
 
-/* =========================
-   MAGNETIC BUTTONS
-========================= */
+// ==========================
+// MAGNETIC BUTTONS
+// ==========================
+document.querySelectorAll(".btn-primary, .btn-ghost").forEach(btn => {
 
-document.querySelectorAll(".btn-primary, .btn-ghost").forEach(btn=>{
-  btn.addEventListener("mousemove", e=>{
+  btn.addEventListener("mousemove", e => {
     const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width/2;
-    const y = e.clientY - rect.top - rect.height/2;
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
-    gsap.to(btn,{
-      x:x*0.2,
-      y:y*0.2,
-      duration:0.3
+    gsap.to(btn, {
+      x: x * 0.2,
+      y: y * 0.2,
+      duration: 0.3
     });
   });
 
-  btn.addEventListener("mouseleave",()=>{
-    gsap.to(btn,{
-      x:0,
-      y:0,
-      duration:0.4
+  btn.addEventListener("mouseleave", () => {
+    gsap.to(btn, {
+      x: 0,
+      y: 0,
+      duration: 0.4
     });
   });
+
 });
 
 
-/* =========================
-   CURSOR LIGHT EFFECT
-========================= */
+// ==========================
+// 3D CARD INTERACTION
+// ==========================
+document.querySelectorAll(".wcard").forEach(card => {
 
+  card.addEventListener("mousemove", e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    gsap.to(card, {
+      rotationY: x * 10,
+      rotationX: -y * 10,
+      transformPerspective: 800,
+      duration: 0.4
+    });
+  });
+
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {
+      rotationX: 0,
+      rotationY: 0,
+      duration: 0.6
+    });
+  });
+
+});
+
+
+// ==========================
+// CURSOR LIGHT EFFECT
+// ==========================
 const light = document.createElement("div");
-light.style.position="fixed";
-light.style.width="300px";
-light.style.height="300px";
-light.style.borderRadius="50%";
-light.style.pointerEvents="none";
-light.style.background="radial-gradient(circle, rgba(79,124,255,0.15), transparent 70%)";
-light.style.zIndex="1";
+
+light.style.position = "fixed";
+light.style.width = "300px";
+light.style.height = "300px";
+light.style.borderRadius = "50%";
+light.style.pointerEvents = "none";
+light.style.background = "radial-gradient(circle, rgba(79,124,255,0.15), transparent 70%)";
+light.style.zIndex = "1";
+
 document.body.appendChild(light);
 
-window.addEventListener("mousemove", e=>{
-  gsap.to(light,{
-    x:e.clientX-150,
-    y:e.clientY-150,
-    duration:0.3
+window.addEventListener("mousemove", e => {
+  gsap.to(light, {
+    x: e.clientX - 150,
+    y: e.clientY - 150,
+    duration: 0.3
   });
 });
 
 
-/* =========================
-   HERO CANVAS NETWORK
-========================= */
-
+// ==========================
+// HERO CANVAS (OPTIMIZED)
+// ==========================
 const canvas = document.getElementById("hero-canvas");
 const ctx = canvas.getContext("2d");
 
@@ -200,44 +233,57 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-for(let i=0;i<80;i++){
+for (let i = 0; i < 40; i++) { // reduced for performance
   particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    vx:(Math.random()-0.5)*0.5,
-    vy:(Math.random()-0.5)*0.5
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.5
   });
 }
 
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+// LIMIT FPS (BIG PERFORMANCE BOOST)
+let lastTime = 0;
 
-  particles.forEach(p=>{
-    p.x+=p.vx;
-    p.y+=p.vy;
+function draw(time) {
 
-    if(p.x<0||p.x>canvas.width)p.vx*=-1;
-    if(p.y<0||p.y>canvas.height)p.vy*=-1;
+  if (time - lastTime < 33) {
+    requestAnimationFrame(draw);
+    return;
+  }
 
-    ctx.fillStyle="#4f7cff";
-    ctx.fillRect(p.x,p.y,2,2);
+  lastTime = time;
 
-    particles.forEach(p2=>{
-      const dx=p.x-p2.x;
-      const dy=p.y-p2.y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if(dist<120){
-        ctx.strokeStyle="rgba(79,124,255,0.08)";
+  particles.forEach(p => {
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.fillStyle = "#4f7cff";
+    ctx.fillRect(p.x, p.y, 2, 2);
+
+    particles.forEach(p2 => {
+      const dx = p.x - p2.x;
+      const dy = p.y - p2.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120) {
+        ctx.strokeStyle = "rgba(79,124,255,0.08)";
         ctx.beginPath();
-        ctx.moveTo(p.x,p.y);
-        ctx.lineTo(p2.x,p2.y);
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
         ctx.stroke();
       }
     });
+
   });
 
   requestAnimationFrame(draw);
 }
 
-draw();
+requestAnimationFrame(draw);
