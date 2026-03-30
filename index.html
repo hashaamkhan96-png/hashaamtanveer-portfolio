@@ -1,12 +1,16 @@
-<!-- ONLY SHOWING CORE UPGRADE PARTS (paste into your file) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- REMOVE your external CSS + JS and paste below -->
+<title>Hashaam Tanveer — Automation & CRM Systems Architect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================
-   🔥 GLOBAL RESET + BASE
-========================= */
+/* ================= GLOBAL ================= */
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
@@ -15,9 +19,7 @@ body{
   overflow:hidden;
 }
 
-/* =========================
-   ⚡ NEON LIGHT SYSTEM
-========================= */
+/* ================= NEON BG ================= */
 body::before{
   content:'';
   position:fixed;
@@ -26,20 +28,12 @@ body::before{
   background:
     radial-gradient(circle at 20% 30%, #00ffee, transparent),
     radial-gradient(circle at 80% 70%, #ff00cc, transparent);
-  filter:blur(140px);
+  filter:blur(120px);
   opacity:0.25;
   z-index:-2;
 }
 
-/* =========================
-   🧠 SMOOTH SCROLL (LENIS)
-========================= */
-#smooth-wrapper{overflow:hidden}
-#smooth-content{will-change:transform}
-
-/* =========================
-   🎯 CURSOR (PREMIUM)
-========================= */
+/* ================= CURSOR ================= */
 .cursor{
   width:18px;height:18px;
   border:2px solid #00ffee;
@@ -48,69 +42,138 @@ body::before{
   pointer-events:none;
   z-index:9999;
   mix-blend-mode:difference;
-  transition:transform .08s ease;
 }
 
-/* =========================
-   🧊 GLASS SYSTEM
-========================= */
-.glass{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 0 40px rgba(0,255,255,0.08);
+/* ================= SMOOTH ================= */
+#smooth-wrapper{overflow:hidden}
+#smooth-content{will-change:transform}
+
+/* ================= NAV ================= */
+nav{
+  position:fixed;
+  width:100%;
+  padding:25px 60px;
+  display:flex;
+  justify-content:space-between;
+  z-index:1000;
 }
 
-/* =========================
-   🔥 HERO 3D CANVAS
-========================= */
+.nav-name{
+  background:linear-gradient(90deg,#00ffee,#ff00cc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ================= HERO ================= */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  padding:0 10%;
+  position:relative;
+}
+
 #hero-canvas{
   position:absolute;
   inset:0;
   z-index:-1;
 }
 
-/* =========================
-   🧲 MAGNETIC BUTTONS
-========================= */
-.btn-primary, .btn-ghost{
-  transition:.2s ease;
+.hero h1{
+  font-size:70px;
 }
+
+.grad-text{
+  background:linear-gradient(90deg,#00ffee,#ff00cc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ================= BUTTON ================= */
+.btn-primary,.btn-ghost{
+  padding:12px 24px;
+  border-radius:40px;
+  margin-right:10px;
+  display:inline-block;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:linear-gradient(90deg,#00ffee,#ff00cc);
+  color:black;
+}
+
 .btn-primary:hover{
-  transform:scale(1.05);
   box-shadow:0 0 30px #00ffee;
+  transform:scale(1.05);
 }
 
-/* =========================
-   🎴 3D CARDS (PROJECTS)
-========================= */
+/* ================= CARDS ================= */
 .wcard{
+  background:rgba(255,255,255,0.05);
+  padding:20px;
+  border-radius:20px;
+  backdrop-filter:blur(20px);
+  transition:0.4s;
   transform-style:preserve-3d;
-  transition:0.4s ease;
-}
-.wcard:hover{
-  transform:rotateY(6deg) rotateX(6deg) scale(1.02);
-  box-shadow:0 40px 80px rgba(0,0,0,0.5);
 }
 
-/* =========================
-   ✨ REVEAL ANIMATIONS BASE
-========================= */
+.wcard:hover{
+  transform:rotateY(6deg) rotateX(6deg) scale(1.03);
+  box-shadow:0 40px 80px rgba(0,0,0,0.6);
+}
+
+/* ================= SECTION ================= */
+.section{
+  padding:120px 10%;
+}
+
 .reveal{
   opacity:0;
   transform:translateY(80px);
 }
 
 </style>
+</head>
 
-<!-- ADD AFTER BODY START -->
+<body>
+
 <div class="cursor"></div>
 
-<!-- WRAP YOUR WHOLE SITE -->
 <div id="smooth-wrapper">
 <div id="smooth-content">
 
-<!-- KEEP YOUR FULL HTML CONTENT SAME -->
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Hashaam Tanveer</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div>
+    <h1>Systems <span class="grad-text">Architect</span></h1>
+    <p>Keep your original hero content here</p>
+    <br>
+    <a class="btn-primary">View Work</a>
+    <a class="btn-ghost">Resume</a>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section">
+  <div class="wcard reveal">Project 1</div>
+  <div class="wcard reveal">Project 2</div>
+  <div class="wcard reveal">Project 3</div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="reveal">
+    <h2>About</h2>
+    <p>Your original about content</p>
+  </div>
+</section>
 
 </div>
 </div>
@@ -123,98 +186,73 @@ body::before{
 
 <script>
 
-/* =========================
-   ⚡ LENIS SMOOTH SCROLL
-========================= */
-const lenis = new Lenis({smooth:true});
+/* LENIS */
+const lenis = new Lenis();
 function raf(time){
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
 
-/* =========================
-   🎯 CURSOR FOLLOW
-========================= */
+/* CURSOR */
 const cursor = document.querySelector(".cursor");
 window.addEventListener("mousemove",(e)=>{
-  cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
+  cursor.style.transform=`translate(${e.clientX}px,${e.clientY}px)`
 });
 
-/* =========================
-   🧲 MAGNETIC EFFECT
-========================= */
-document.querySelectorAll(".btn-primary,.btn-ghost").forEach(el=>{
-  el.addEventListener("mousemove",(e)=>{
-    const r = el.getBoundingClientRect();
-    const x = e.clientX - r.left - r.width/2;
-    const y = e.clientY - r.top - r.height/2;
-    el.style.transform=`translate(${x*0.25}px,${y*0.25}px)`;
+/* MAGNETIC */
+document.querySelectorAll(".btn-primary,.btn-ghost").forEach(btn=>{
+  btn.addEventListener("mousemove",(e)=>{
+    const r=btn.getBoundingClientRect();
+    const x=e.clientX-r.left-r.width/2;
+    const y=e.clientY-r.top-r.height/2;
+    btn.style.transform=`translate(${x*0.2}px,${y*0.2}px)`
   });
-  el.addEventListener("mouseleave",()=>el.style.transform="translate(0,0)");
+  btn.addEventListener("mouseleave",()=>btn.style.transform="translate(0,0)");
 });
 
-/* =========================
-   🔥 GSAP MASTER TIMELINE
-========================= */
+/* GSAP */
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".reveal").forEach(el=>{
   gsap.to(el,{
-    scrollTrigger:{
-      trigger:el,
-      start:"top 85%"
-    },
+    scrollTrigger:{trigger:el,start:"top 85%"},
     opacity:1,
     y:0,
-    duration:1,
-    ease:"power3.out"
+    duration:1
   });
 });
 
-/* =========================
-   🌌 THREE JS HERO (ADVANCED)
-========================= */
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-const renderer = new THREE.WebGLRenderer({canvas:document.getElementById("hero-canvas"),alpha:true});
+/* THREE HERO */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById("hero-canvas"),alpha:true});
 renderer.setSize(innerWidth,innerHeight);
 
-const geometry = new THREE.BufferGeometry();
-const count = 4000;
-const pos = new Float32Array(count*3);
+const geo=new THREE.BufferGeometry();
+const count=3000;
+const pos=new Float32Array(count*3);
 
 for(let i=0;i<count*3;i++){
-  pos[i]=(Math.random()-0.5)*15;
+  pos[i]=(Math.random()-0.5)*12;
 }
 
-geometry.setAttribute('position', new THREE.BufferAttribute(pos,3));
+geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
 
-const material = new THREE.PointsMaterial({
-  size:0.01,
-  color:0x00ffee
-});
-
-const mesh = new THREE.Points(geometry,material);
+const mat=new THREE.PointsMaterial({size:0.01,color:0x00ffee});
+const mesh=new THREE.Points(geo,mat);
 scene.add(mesh);
 
-camera.position.z = 4;
+camera.position.z=4;
 
 function animate(){
   requestAnimationFrame(animate);
-  mesh.rotation.y += 0.0007;
-  mesh.rotation.x += 0.0003;
+  mesh.rotation.y+=0.0008;
   renderer.render(scene,camera);
 }
 animate();
 
-/* =========================
-   💡 MOUSE LIGHT EFFECT
-========================= */
-window.addEventListener("mousemove",(e)=>{
-  document.body.style.background =
-    `radial-gradient(circle at ${e.clientX}px ${e.clientY}px,
-     rgba(0,255,238,0.08), transparent 40%)`;
-});
-
 </script>
+
+</body>
+</html>
