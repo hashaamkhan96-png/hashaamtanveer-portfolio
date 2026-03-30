@@ -5,132 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hashaam Portfolio</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
   background:#050505;
   color:white;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
-/* Neon Gradient Background */
+/* CUSTOM CURSOR */
+.cursor{
+  width:20px;height:20px;
+  border:2px solid #00ffee;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  z-index:9999;
+  transition:0.1s;
+}
+
+/* NEON BACKGROUND */
 body::before{
   content:'';
   position:fixed;
   width:200%;
   height:200%;
-  background:linear-gradient(45deg,#ff00cc,#3333ff,#00ffee,#ffcc00);
-  animation:gradientMove 15s infinite linear;
+  background:radial-gradient(circle at 30% 30%,#00ffee,transparent),
+             radial-gradient(circle at 70% 70%,#ff00cc,transparent);
+  filter:blur(120px);
+  opacity:0.25;
   z-index:-2;
-  filter:blur(150px);
-  opacity:0.3;
 }
 
-@keyframes gradientMove{
-  0%{transform:translate(-25%,-25%)}
-  50%{transform:translate(25%,25%)}
-  100%{transform:translate(-25%,-25%)}
+/* SMOOTH WRAPPER */
+#smooth-wrapper{
+  overflow:hidden;
+}
+#smooth-content{
+  will-change:transform;
 }
 
-/* Glass effect */
-.glass{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:20px;
-}
-
-/* Navbar */
+/* NAV */
 nav{
   position:fixed;
-  top:0;
   width:100%;
-  padding:20px 50px;
+  padding:25px 60px;
   display:flex;
   justify-content:space-between;
   z-index:1000;
 }
-
 nav h1{
   font-weight:800;
-  font-size:24px;
   background:linear-gradient(90deg,#00ffee,#ff00cc);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-/* Sections */
-section{
-  min-height:100vh;
-  padding:120px 10%;
+/* HERO */
+.hero{
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
+  padding:0 10%;
 }
-
-/* Hero */
 .hero h2{
-  font-size:60px;
-  font-weight:800;
+  font-size:70px;
 }
-
 .hero span{
   background:linear-gradient(90deg,#00ffee,#ff00cc);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.hero p{
-  margin-top:20px;
-  opacity:0.7;
-}
-
-/* Cards */
+/* CARDS */
 .card{
-  padding:30px;
-  margin-top:30px;
+  padding:40px;
+  margin:40px 0;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
   transition:0.4s;
-  cursor:pointer;
 }
-
 .card:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 0 40px rgba(0,255,255,0.3);
+  transform:translateY(-15px) scale(1.03);
+  box-shadow:0 0 60px rgba(0,255,255,0.4);
 }
 
-/* Button */
+/* MAGNETIC BUTTON */
 .btn{
-  margin-top:30px;
   display:inline-block;
-  padding:15px 30px;
+  padding:15px 35px;
   border-radius:50px;
   background:linear-gradient(90deg,#00ffee,#ff00cc);
   color:black;
-  font-weight:600;
+  margin-top:30px;
   cursor:pointer;
-  transition:0.3s;
+  position:relative;
 }
 
-.btn:hover{
-  transform:scale(1.1);
-}
-
-/* Footer */
-footer{
-  text-align:center;
-  padding:40px;
-  opacity:0.6;
-}
-
+/* CANVAS */
 canvas{
   position:fixed;
   top:0;
@@ -142,7 +119,11 @@ canvas{
 
 <body>
 
+<div class="cursor"></div>
 <canvas id="bg"></canvas>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
 
 <nav>
   <h1>Hashaam</h1>
@@ -150,92 +131,98 @@ canvas{
 
 <section class="hero">
   <h2>Hi, I'm <span>Hashaam</span></h2>
-  <p>Your original content stays here exactly.</p>
-  <div class="btn">View Work</div>
+  <p>Keep your original content</p>
+  <div class="btn magnet">View Work</div>
 </section>
 
-<section>
-  <div class="card glass">
-    <h3>About</h3>
-    <p>Keep your original text here.</p>
-  </div>
-
-  <div class="card glass">
-    <h3>Projects</h3>
-    <p>Keep your original projects content.</p>
-  </div>
-
-  <div class="card glass">
-    <h3>Contact</h3>
-    <p>Keep your original contact info.</p>
-  </div>
+<section style="padding:120px 10%;">
+  <div class="card">About (keep your content)</div>
+  <div class="card">Projects (keep your content)</div>
+  <div class="card">Contact (keep your content)</div>
 </section>
 
-<footer>
-  © 2026 Hashaam
-</footer>
+</div>
+</div>
 
-<!-- GSAP -->
+<!-- LIBRARIES -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-<!-- THREE JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <script>
-// GSAP animations
-gsap.from(".hero h2",{y:100,opacity:0,duration:1});
-gsap.from(".hero p",{y:50,opacity:0,duration:1,delay:0.3});
-gsap.from(".btn",{scale:0,opacity:0,duration:0.5,delay:0.8});
+// LENIS SMOOTH SCROLL
+const lenis = new Lenis();
+function raf(time){
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
 
-// Scroll animations
+// CUSTOM CURSOR
+const cursor = document.querySelector(".cursor");
+window.addEventListener("mousemove",(e)=>{
+  cursor.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;
+});
+
+// MAGNETIC BUTTON
+document.querySelectorAll(".magnet").forEach(btn=>{
+  btn.addEventListener("mousemove",(e)=>{
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    btn.style.transform=`translate(${x*0.3}px,${y*0.3}px)`;
+  });
+  btn.addEventListener("mouseleave",()=>{
+    btn.style.transform="translate(0,0)";
+  });
+});
+
+// GSAP SCROLL
 gsap.utils.toArray(".card").forEach(card=>{
   gsap.from(card,{
-    scrollTrigger:{
-      trigger:card,
-      start:"top 80%"
-    },
+    scrollTrigger:{trigger:card,start:"top 80%"},
     y:100,
     opacity:0,
     duration:1
   });
 });
 
-// THREE JS PARTICLES
+// THREE JS ADVANCED PARTICLES
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-const renderer = new THREE.WebGLRenderer({canvas:document.getElementById("bg"),alpha:true});
+const renderer = new THREE.WebGLRenderer({canvas:bg,alpha:true});
 renderer.setSize(innerWidth,innerHeight);
 
 const particlesGeometry = new THREE.BufferGeometry();
-const particlesCount = 1000;
+const count = 2000;
+const positions = new Float32Array(count*3);
 
-const posArray = new Float32Array(particlesCount * 3);
-
-for(let i=0;i<particlesCount*3;i++){
-  posArray[i]=(Math.random()-0.5)*5;
+for(let i=0;i<count*3;i++){
+  positions[i]=(Math.random()-0.5)*10;
 }
 
-particlesGeometry.setAttribute('position',new THREE.BufferAttribute(posArray,3));
+particlesGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
 
-const particlesMaterial = new THREE.PointsMaterial({
-  size:0.01,
-  color:0x00ffee
+const material = new THREE.PointsMaterial({
+  size:0.015,
+  color:0xff00cc
 });
 
-const particlesMesh = new THREE.Points(particlesGeometry,particlesMaterial);
-scene.add(particlesMesh);
+const mesh = new THREE.Points(particlesGeometry,material);
+scene.add(mesh);
 
-camera.position.z=2;
+camera.position.z=3;
 
 function animate(){
   requestAnimationFrame(animate);
-  particlesMesh.rotation.y += 0.001;
+  mesh.rotation.y += 0.0008;
+  mesh.rotation.x += 0.0005;
   renderer.render(scene,camera);
 }
 animate();
 
-// Resize fix
-addEventListener("resize",()=>{
+window.addEventListener("resize",()=>{
   renderer.setSize(innerWidth,innerHeight);
   camera.aspect=innerWidth/innerHeight;
   camera.updateProjectionMatrix();
